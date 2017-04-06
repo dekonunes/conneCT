@@ -1,0 +1,14 @@
+footer, p, a {
+    color: white;
+}
+footer li {
+    margin-left: -9px;
+}
+footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
+    background:#2c3e50;
+}

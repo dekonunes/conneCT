@@ -1,0 +1,15 @@
+<rb-header></rb-header>
+<div class="col-md-12">
+    <ul class="list-group list-inline text-center">
+        <li><h1>{{user?.name}}</h1></li>
+        <li><a class="glyphicon glyphicon-pencil" style="cursor: pointer"></a></li>
+    </ul>
+</div>
+<div class="col-md-8">
+  <div *ngIf="user">
+    <rb-question-list [_questions]="user.questions"></rb-question-list>
+  </div>
+</div>
+<div class="list-group-item col-md-3" >
+    <rb-contact-record></rb-contact-record>
+</div>

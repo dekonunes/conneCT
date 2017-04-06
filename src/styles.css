@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+.animateScale {
+    transition: all 0.5s;
+}
+
+.animateScale:hover {
+    transform: scale(1.2);
+}

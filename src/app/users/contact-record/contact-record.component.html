@@ -1,0 +1,37 @@
+<h2 class="text-center">Registro do contato</h2>
+<form #formData='ngForm' (ngSubmit)="onSubmit(formData)" novalidade>
+  <ul class="list-unstyled">
+    <li>Contactante:</li>
+    <li>
+      <input type="text" placeholder="Insira o seu nome:s"
+                class="form-control"
+                required
+                #nameContact="ngModel"
+                name="nameContact"
+                (ngModel)="nameContact">
+    </li>
+    <li>Histórico do contato:</li>
+    <li>
+      <textarea type="text" placeholder="Insira como foi e o que foi conversado durante o contato."
+              class="form-control"
+              required
+              #nameContact="ngModel"
+              name="messageContact"
+              (ngModel)="messageContact">>
+      </textarea>
+    </li>
+    <li>
+      <button type="submit" class="btn" name="button">Enviar</button>
+    </li>
+  </ul>
+  <div *ngFor="let messageContact of messagesContactRecord | async">
+    <ul class="list-unstyled">
+      <li>
+        {{messageContact.nameContact}}
+      </li>
+      <li>
+        {{messageContact.message}}
+      </li>
+    </ul>
+  </div>
+</form>
