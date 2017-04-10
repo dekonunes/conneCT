@@ -9,3 +9,11 @@
 .animateScale:hover {
     transform: scale(1.2);
 }
+
+.full-width {
+  width: 100%;
+}
+
+.colorCard {
+  background-color: #fafafa;
+}

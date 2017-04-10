@@ -1,37 +1,45 @@
-<h2 class="text-center">Registro do contato</h2>
-<form #formData='ngForm' (ngSubmit)="onSubmit(formData)" novalidade>
-  <ul class="list-unstyled">
-    <li>Contactante:</li>
-    <li>
-      <input type="text" placeholder="Insira o seu nome:s"
-                class="form-control"
-                required
-                #nameContact="ngModel"
-                name="nameContact"
-                (ngModel)="nameContact">
-    </li>
-    <li>Histórico do contato:</li>
-    <li>
-      <textarea type="text" placeholder="Insira como foi e o que foi conversado durante o contato."
-              class="form-control"
+<md-card class="colorCard">
+    <md-card-title>
+      <b>Registro do contato</b>
+    </md-card-title>
+  <md-card>
+  <md-card-content>
+    <form #contactForm='ngForm' (ngSubmit)="onSubmit(contactForm)" novalidade>
+      <ul class="list-unstyled">
+        <li><md-icon>person</md-icon>Contactante:</li>
+          <md-input-container class="full-width">
+            <input mdInput placeholder="Insira o seu nome:"
               required
               #nameContact="ngModel"
+              name="nameContact"
+              (ngModel)="nameContact"
+              mdInput>
+          </md-input-container>
+        <li><md-icon>note_add</md-icon>Histórico do contato:</li>
+        <li>
+          <md-input-container class="full-width">
+            <textarea type="text"
+              placeholder="Insira o que foi conversado no contato."
+              required
+              
               name="messageContact"
-              (ngModel)="messageContact">>
-      </textarea>
-    </li>
-    <li>
-      <button type="submit" class="btn" name="button">Enviar</button>
-    </li>
-  </ul>
-  <div *ngFor="let messageContact of messagesContactRecord | async">
-    <ul class="list-unstyled">
-      <li>
-        {{messageContact.nameContact}}
-      </li>
-      <li>
-        {{messageContact.message}}
-      </li>
-    </ul>
-  </div>
-</form>
+              mdInput>
+            </textarea>
+          </md-input-container>
+        </li>
+      </ul>
+    <md-card-actions>
+      <button type="submit" md-raised-button name="button">Enviar</button>
+    </md-card-actions>
+    </form>
+  </md-card-content>
+  </md-card>
+<md-divider></md-divider>
+<md-card-title>
+  <b>Histórico do contato</b>
+</md-card-title>
+  <md-card *ngFor="let messageContact of messagesContactRecord">
+      <h4 ><md-icon>person</md-icon>{{messageContact.nameContact}}</h4>
+      <div><md-icon>note_add</md-icon><p>{{messageContact.message}}</p></div>
+  </md-card>
+</md-card>

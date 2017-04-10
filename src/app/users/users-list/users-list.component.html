@@ -1,15 +1,27 @@
 <rb-header></rb-header>
-<div class="col-md-offset-1 col-md-10 list-group-item clearfix" align="center" *ngIf="users.length == 0">
-  <h2>Nenhum companheiro encontrado, adicione um apertando no botão "+" acima.</h2>
-</div>
 <div class="col-md-12">
     <ul class="list-group list-unstyled">
-        <li *ngFor="let user of users | async">
-          <div class="col-md-offset-1 col-md-10">
-            <a (click)="routerComponent(user.id)" class="list-group-item clearfix">
-              <h1>{{user.name}}</h1>
-            </a>
-          </div>
-        </li>
+      <li *ngIf="users.length == 0" class="col-md-offset-1 col-md-10" align="center">
+        <h2>Nenhum companheiro encontrado, adicione apertando no botão <button (click)="openDialog()" md-fab><md-icon>add</md-icon></button></h2>
+      </li>
+      <li *ngIf="users.length != 0">
+        <form class="col-md-offset-1 col-md-10" role="search">
+            <md-input-container class="full-width">
+                <input type="text" mdInput (input)="search($event.target.value)" placeholder="Busca">
+            </md-input-container>
+        </form>
+      </li>
+      <li *ngFor="let user of filteredUsers">
+        <div class="col-md-offset-1 col-md-10">
+          <a (click)="routerComponent(user.id)" class="list-group-item clearfix">
+            <h1>{{user.name}}</h1>
+          </a>
+        </div>
+        <div style="padding: 35px 35px 35px 35px;color: white">.</div>
+      </li>
     </ul>
+    <div style="padding: 35px 35px 35px 35px;color: white">.</div>
+    <div *ngIf="users.length != 0">
+      <button (click)="openDialog()" md-fab  class="buttonAdd"><md-icon>add</md-icon></button>
+    <div>
 </div>

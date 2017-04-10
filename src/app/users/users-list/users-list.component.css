@@ -1,3 +1,10 @@
 a {
   cursor: pointer;
 }
+
+.buttonAdd {
+  display: inline-block;
+  position: fixed;
+  bottom: 55px;
+  right: 50px;
+}

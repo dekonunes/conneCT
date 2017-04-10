@@ -14,12 +14,12 @@ export class QuestionService {
     new Question (6, true, "[Nunca, Esporádico, Ocasional, Pouco frequente, Frequente]", "Contato com a CT", "Quão frequente tem sido o seu contato com a CT onde esteve acolhido?"),
     new Question (7, true, "[Nunca, Esporádico, Ocasional, Pouco frequente, Frequente]", "Contato com AA, CAPS, NA, etc.", "Quão frequente tem sido o seu contato com entidades que auxiliam namanutenção?"),
     new Question (8, true, "[Nunca, Esporádico, Ocasional, Pouco frequente, Frequente]", 'Espiritualidade', "Quão frequente tem sido a sua preocupação com sua espiritualidade?"),
-    new Question (9, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Família', 'Como você se sente hoje no relacionamento com seus familiares?'),
-    new Question (10, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Família', 'Como você se sente hoje no relacionamento com seus familiares?'),
-    new Question (11, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Família', 'Como você se sente hoje no relacionamento com seus familiares?'),
-    new Question (12, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Família', 'Como você se sente hoje no relacionamento com seus familiares?'),
-    new Question (13, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Família', 'Como você se sente hoje no relacionamento com seus familiares?'),
-    new Question (14, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Família', 'Como você se sente hoje no relacionamento com seus familiares?')
+    new Question (9, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Moradia', 'Como você se sente hoje no relacionamento com seus familiares?'),
+    new Question (10, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Emprego', 'Como você se sente hoje no relacionamento com seus familiares?'),
+    new Question (11, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Educação', 'Como você se sente hoje no relacionamento com seus familiares?'),
+    new Question (12, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Lazer', 'Como você se sente hoje no relacionamento com seus familiares?'),
+    new Question (13, true, "[Muito Preconceito, Bastante, Neutro , Pouco, Nenhum Preconceito]", 'Esporte', 'Como você se sente hoje no relacionamento com seus familiares?'),
+    new Question (14, true, "[Abandonei, Tomo quando acho que preciso, Tomo de vez em quando, Tomo quando lembro, Tomo Regularmente]", 'Medicação', 'Como você se sente hoje no relacionamento com seus familiares?')
   ];
 
   constructor() {}

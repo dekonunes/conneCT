@@ -1,35 +1,38 @@
-<rb-headerLogin></rb-headerLogin>
+<rb-header-login></rb-header-login>
 <div class="col-md-10 col-md-offset-1">
   <h3>Entre com os dados de acesso</h3>
-  <form #formData='ngForm' (ngSubmit)="login(formData)" novalidade>
-      <div [ngClass]="getFormGroupClass(email.valid,email.pristine)">
-          <label for="email" class="form-control-label">E-Mail</label>
-          <input type="text" placeholder="Insira o e-mail"
-                    [ngClass]="getFormControlClass(email.valid,email.pristine)"
-                     required
-                     #email="ngModel"
-                     name="email"
-                     (ngModel)="email">
-        <div class="alert alert-danger" role="alert" [hidden]="email.valid || email.pristine">
+  <br>
+  <form [formGroup]='signinForm' (ngSubmit)="login(signinForm); $event.preventDefault()" novalidade>
+      <div>
+          <label for="email"><md-icon>email</md-icon> E-Mail:</label>
+          <br>
+          <md-input-container class="full-width">
+            <input mdInput placeholder="Insira o e-mail"
+              name="email"
+              formControlName="email">
+          </md-input-container>
+        <!-- <div class="alert alert-danger" role="alert" [hidden]="email.valid || email.pristine">
           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span>
+          <span class="sr-only">Erro:</span>
           Entre com um e-mail valido
-        </div>
+        </div> -->
       </div>
-      <div [ngClass]="getFormGroupClass(email.valid,email.pristine)">
-          <label for="password" class="form-control-label">Password</label>
-          <input type="password"  placeholder="Insira a senha"
-                    [ngClass]="getFormControlClass(email.valid,email.pristine)"
-                     required
-                     (ngModel)="password" name="password"
-                     #password="ngModel" pattern=".{6,}">
-             <div class="alert alert-danger" role="alert" [hidden]="password.valid || password.pristine">
+      <div>
+          <label for="password"><md-icon>vpn_key</md-icon> Senha</label>
+          <br>
+          <md-input-container class="full-width">
+            <input type="password" mdInput
+              placeholder="Insira a senha"
+              name="password"
+              formControlName="password">
+          </md-input-container>
+             <!-- <div class="alert alert-danger" role="alert" [hidden]="password.valid || password.pristine">
                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                <span class="sr-only">Error:</span>
                Digite uma senha válida com no minimo 6 digitos
-             </div>
+             </div> -->
       </div>
       <br>
-      <button type="submit" [disabled]="!formData.valid" class="btn btn-primary">Entrar</button>
+      <button type="submit" [disabled]="signinForm.invalid" md-raised-button>Entrar</button>
   </form>
 </div>

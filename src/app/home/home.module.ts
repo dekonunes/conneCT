@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from "./home.component"
 import { HomeRoutingModule } from "./home-routes.module"
-import { HeaderLoginModule } from "../login/headerlogin.module"
+import { HeaderLoginModule } from "../login/header-login.module"
 
 @NgModule({
     imports: [

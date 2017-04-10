@@ -1,15 +1,23 @@
-textarea{
+textarea {
     height: 150px;
     width: 100%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-input {
-    height: 100%;
-    width: 100%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+.colorCard {
+  background-color: #fafafa;
+}
+
+.scrolling-content {
+  display: block;
+font-family: monospace;
+white-space: pre-wrap;
+margin: 1em 0px 1em;
+}
+
+.sidenav-fab-container {
+  display: flex;
+  overflow: visible;
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }

@@ -3,19 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 
-import { HeaderComponent } from "./header.component";
+import { UsersListComponent } from "./users-list.component";
+import { HeaderModule } from "../../header/header.module";
 
 @NgModule({
     imports: [
       BrowserModule,
       MaterialModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      HeaderModule
     ],
     declarations: [
-      HeaderComponent
+      UsersListComponent
     ],
     exports: [
-      HeaderComponent
+      UsersListComponent
     ]
 })
-export class HeaderModule {}
+export class UsersListModule {}

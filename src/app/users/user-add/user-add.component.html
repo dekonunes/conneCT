@@ -1,103 +1,94 @@
 <div class="row">
     <div class="col-xs-10 col-xs-offset-2">
-        <form #formData="ngForm" (ngSubmit)="onSubmit(formData)" >
+        <form [formGroup]='newUserForm' (ngSubmit)="onSubmit(newUserForm); $event.preventDefault()" novalidade >
             <div class="row">
-                <div class="col-sm-5 form-group">
-                    <label for="user-name">Nome Completo</label>
-                    <input type="text"
-                           required
-                           #name="ngModel"
-                           class="form-control"
-                           (ngModel)="name"
-                           name="name">
+                <div class="col-sm-5">
+                  <label><md-icon>person</md-icon> Nome Completo</label>
+                  <br>
+                  <md-input-container class="form-width">
+                    <input mdInput placeholder="Digite o nome"
+                      name="username"
+                      formControlName="username">
+                  </md-input-container>
                 </div>
 
-                <div class="col-sm-5 form-group">
-                    <label for="user-email">E-mail (Login de acesso)</label>
-                    <input type="text"
-                           required
-                           #email="ngModel"
-                           class="form-control"
-                           (ngModel)="email"
-                           name="email">
+                 <div class="col-sm-5">
+                  <label><md-icon>email</md-icon> E-mail (Login de acesso)</label>
+                  <br>
+                  <md-input-container class="form-width">
+                    <input mdInput placeholder="Insira o e-mail"
+                      name="email"
+                      formControlName="email">
+                  </md-input-container>
                 </div>
 
-                <div class="col-sm-5 form-group">
-                    <label for="user-password">Senha (Para acessar o app)</label>
-                    <input type="password"
-                           required
-                           #password="ngModel"
-                           class="form-control"
-                           (ngModel)="password"
-                           name="password">
+                <div class="col-sm-5">
+                  <label><md-icon>vpn_key</md-icon> Senha (Para acessar o app)</label>
+                  <br>
+                  <md-input-container class="form-width">
+                    <input mdInput placeholder="Insira a senha"
+                      name="password"
+                      formControlName="password"
+                      type="password">
+                  </md-input-container>
                 </div>
 
-                <div class="col-sm-5 form-group">
-                    <label for="user-passwordConfirmation">Confirme a senha</label>
-                    <input type="password"
-                           required
-                           #passwordConfirmation="ngModel"
-                           class="form-control"
-                           (ngModel)="passwordConfirmation"
-                           name="passwordConfirmation">
+                <div class="col-sm-5">
+                  <label><md-icon>vpn_key</md-icon> Confirme a senha</label>
+                  <br>
+                  <md-input-container class="form-width">
+                    <input mdInput placeholder="Insira novamente a senha"
+                      name="confirmPassword"
+                      type="password"
+                      formControlName="confirmPassword">
+                  </md-input-container>
                 </div>
 
-                <div class="col-sm-5 form-group">
-                    <label for="user-phone">Telefone</label>
-                    <input type="tel"
-                           placeholder="(xx)xxxxxxxx"
-                           pattern="^\([1-9]{2}\)[2-9][0-9]{3,4}[0-9]{4}$"
-                           class="form-control"
-                           (ngModel)="phone"
-                           name="phone"
-                           #phoneValid="ngModel">
-                    <div *ngIf="!phoneValid.valid">
-                        Formato: (xx)xxxxxxxx
-                    </div>
-
+                <div class="col-sm-5">
+                  <label><md-icon>phone</md-icon> Telefone</label>
+                  <br>
+                  <md-input-container class="form-width">
+                    <input mdInput placeholder="Insira o telefone"
+                      name="text"
+                      formControlName="phone">
+                  </md-input-container>
                 </div>
 
-                <div class="col-sm-5 form-group">
-                    <label for="user-phoneContact">Telefone de outro contato</label>
-                    <input type="tel"
-                           placeholder="(xx)xxxxxxxx"
-                           pattern="^\([1-9]{2}\)[2-9][0-9]{3,4}[0-9]{4}$"
-                           class="form-control"
-                           (ngModel)="phoneContact"
-                           name="phoneContact"
-                           #phoneContactValid="ngModel">
-                    <div *ngIf="!phoneContactValid.valid">
-                        Formato: (xx)xxxxxxxx
-                    </div>
+                <div class="col-sm-5">
+                  <label><md-icon>phone</md-icon> Telefone de outro contato</label>
+                  <br>
+                  <md-input-container class="form-width">
+                    <input mdInput placeholder="Insira o telefone de um contato"
+                      name="text"
+                      formControlName="otherPhone">
+                  </md-input-container>
                 </div>
 
-
-                <div class="col-sm-5 form-group">
-                    <div class="radio" *ngFor="let gender of genders">
-                        <label>
-                            <input type="radio"
-                                   name="gender"
-                                   [ngModel]="gender"
-                                   [value]="gender">
-                            {{gender}}
-                        </label>
-                    </div>
+                <div class="col-sm-5">
+                  <label><md-icon svgIcon="gender"></md-icon>Genero</label>
+                  <br>
+                  <md-radio-group>
+                    <md-radio-button *ngFor="let gender of genders" [value]="gender"
+                    required>
+                      {{gender}}
+                    </md-radio-button>
+                  </md-radio-group>
                 </div>
 
-                <div class="col-sm-5 form-group">
-                    <label for="user-birthday">Data de Nascimento</label>
-                    <input type="date"
-                           required
-                           #birthday="ngModel"
-                           class="form-control"
-                           (ngModel)="birthday"
-                           name="birthday">
+                <div class="col-sm-5">
+                  <label><md-icon>date_range</md-icon> Data de Nascimento</label>
+                  <br>
+                  <md-input-container >
+                    <input mdInput
+                      type="date"
+                      name="date"
+                      formControlName="birthday"
+                      required>
+                  </md-input-container>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit" [disabled]="!formData.valid">Criar conta</button>
-                </div>
+            <div class="col-xs-12">
+                <button type="submit" [disabled]="!newUserForm.valid" md-raised-button>Criar conta</button>
             </div>
         </form>
     </div>

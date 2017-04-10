@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import { FirebaseObjectObservable } from 'angularfire2';
+import { Observable } from "rxjs/Observable";
 
 import { Question } from '../../shared/question.model';
 import { User } from "../../shared/user.model"
@@ -14,7 +14,7 @@ import { UserService } from "../../shared/user.service";
 export class UserComponent implements OnInit {
   uidDQ: string;
   uidCT: string;
-  user: FirebaseObjectObservable<User>;
+  user: User;
 
   constructor(
     private activatedRouter: ActivatedRoute,

@@ -1,41 +1,37 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
 @Component({
     selector: 'rb-signin',
-    templateUrl: './signin.component.html'
+    templateUrl: './signin.component.html',
+    styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
     error = false;
     errorMessage = '';
+    signinForm: FormGroup;
 
     constructor(
       private af: AngularFire,
-      private router: Router) {}
+      public formBuilder: FormBuilder,
+      private router: Router) {
 
-    getFormGroupClass(isValid: boolean, isPristine: boolean): {} {
-      return {
-        'form-group': true,
-        'has-danger': !isValid && !isPristine,
-        'has-sucess': isValid
+        let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+
+        this.signinForm = this.formBuilder.group({
+          email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+          password: ['', [Validators.required, Validators.minLength(6)]],
+        });
       }
-    }
 
-    getFormControlClass(isValid: boolean, isPristine: boolean): {} {
-      return {
-        'form-control': true,
-        'form-control-danger': !isValid && !isPristine,
-        'form-control-sucess': isValid
-      }
-    }
-
-    login(formData: any) {
-      if(formData.valid) {
+    login(signinForm: any) {
+      if(signinForm.valid) {
         this.af.auth.login({
-          email: formData.value.email,
-          password: formData.value.password
+          email: signinForm.value.email,
+          password: signinForm.value.password
         },
         {
           provider: AuthProviders.Password,

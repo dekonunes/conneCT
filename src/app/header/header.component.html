@@ -1,68 +1,26 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header" dropdown>
-            <button type="button" class="navbar-toggle collapsed" dropdown data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only" dropdown>Toggle navigation</span>
-                <span class="icon-bar" dropdown></span>
-                <span class="icon-bar" dropdown></span>
-                <span class="icon-bar" ></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav" >
-                <a class="navbar-brand animateScale" href="/users/{{uidCT}}">Conne<span class="text-green">CT</span></a>
-                <!-- <li class="dropdown" dropdown *ngFor="let letter of alphabet">
-                    <a href="#" class="dropdown-toggle animateScale" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{letter}}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">André</a></li>
-                        <li><a href="#">Andreoli</a></li>
-                    </ul>
-                </li> -->
-                <li class="dropdown" dropdown>
-                    <a class="dropdown-toggle animateScale" Style="font-size:20px" md-button (click)="openDialog()">+</a>
-                </li>
-                <li><a class="animateScale" (click)="logout()">Sair</a></li>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" dropdown>
-                        <a class="dropdown-toggle animateScale" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CT <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a>Configuração</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a (click)="logout()">home</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" (input)="search($event.target.value)" class="form-control" placeholder="Busca">
-                        <!-- <div class="dropdown" data-toggle="dropdown" aria-expanded="true"> -->
-                          <!-- <ul class="list-group dropdown-menu" role="menu"> -->
-                          <ul class="list-group" >
-                            <li class="list-group-item" *ngIf="user">{{user.name}}</li>
-                            <!-- <li class="list-group-item" *ngFor="let user of users | async">{{user?.name}}</li> -->
-                          </ul>
-
-                        <!-- </div> -->
-                    </div>
-                </form>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-<!--<div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
-    <!--<div class="modal-dialog modal-lg">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header">-->
-                <!--<button type="button" class="close" aria-label="Close" (click)="smModal.hide()">-->
-                    <!--<span aria-hidden="true">&times;</span>-->
-                <!--</button>-->
-                <!--<h4 class="modal-title">Adicione um novo companheiro</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                <!--<rb-user-add></rb-user-add>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<md-toolbar>
+  <img src="assets/images/logoGrande.png" alt="">
+  <a (click)="navigate()" md-button *ngIf="uidDQ != null">Companheiros</a>
+  <span class="example-spacer"></span>
+  <md-input-container>
+    <input mdInput placeholder="Busca" [mdAutocomplete]="auto" (input)="search($event.target.value)">
+  </md-input-container>
+  <md-autocomplete #auto="mdAutocomplete">
+    <md-option *ngFor="let user of filteredUsers" [value]="state">
+      {{ user.name }}
+    </md-option>
+  </md-autocomplete>
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon >more_vert</md-icon>
+  </button>
+  <md-menu #menu="mdMenu">
+    <button md-menu-item>
+      <md-icon>settings</md-icon>
+      <span>Configurações</span>
+    </button>
+    <button md-menu-item (click)="logout()">
+      <md-icon>exit_to_app</md-icon>
+      <span>Sair</span>
+    </button>
+  </md-menu>
+</md-toolbar>

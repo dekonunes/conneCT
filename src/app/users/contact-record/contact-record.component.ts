@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import { FirebaseListObservable } from 'angularfire2';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { UserService } from "../../shared/user.service";
 import { ContactRecord } from "../../shared/contact-record.model";
@@ -14,11 +14,13 @@ import { ContactRecord } from "../../shared/contact-record.model";
 export class ContactRecordComponent implements OnInit {
   uidCT: string;
   uidDQ: string;
-  messagesContactRecord: FirebaseListObservable<ContactRecord[]>;
+  contactForm: FormGroup;
+  messagesContactRecord: ContactRecord[] = [];
 
   constructor(
     private activatedRouter: ActivatedRoute,
-    private userService: UserService) {}
+    private userService: UserService,
+    public formBuilder: FormBuilder,) {}
 
   ngOnInit() {
     this.activatedRouter.params.forEach((_params: Params) => {
@@ -40,11 +42,17 @@ export class ContactRecordComponent implements OnInit {
     this.getMessagensRecord();
   }
 
+  reverseArray() {
+    this.messagesContactRecord.reverse();
+  }
+
   getMessagensRecord() {
     let date = new Date();
-    this.messagesContactRecord = this.userService.getMessageContactRecord(
-      this.uidCT,
-      this.uidDQ);
+    this.userService.getMessageContactRecord(this.uidCT,this.uidDQ)
+      .subscribe(_messagesContactRecord => {
+        this.messagesContactRecord = _messagesContactRecord
+        this.reverseArray()});
+    ;
   }
 
 }

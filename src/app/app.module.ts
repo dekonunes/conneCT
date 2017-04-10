@@ -7,17 +7,17 @@ import 'hammerjs';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppComponent } from "./app.component";
-import { ContactRecordComponent } from "./users/contact-record";
+import { ContactRecordModule } from "./users/contact-record/contact-record.module";
 import { DropdownDirective } from "./shared/dropdown.directive";
 import { UserService } from "./shared/user.service";
-import { FooterComponent } from "./footer/footer.component"
+import { FooterModule } from "./footer/footer.module"
 import { HeaderModule } from "./header/header.module";
-import { HeaderLoginModule } from "./login/headerlogin.module";
+import { HeaderLoginModule } from "./login/header-login.module";
 import { HomeModule } from "./home/home.module";
 import { AppRoutingModule } from "./app-routes.module";
 import { UserAddModule } from "./users/user-add/user-add.module";
-import { UserComponent } from "./users/userPage/user.component";
-import { UsersListComponent } from './users/users-list/users-list.component';
+import { UserModule } from "./users/user/user.module";
+import { UsersListModule } from './users/users-list/users-list.module';
 import { QuestionListModule } from "./users/question-list/question-list.module";
 import { QuestionService } from "./shared/question.service";
 
@@ -37,16 +37,14 @@ const myFirebaseAuthConfig = {
 @NgModule({
     declarations: [
         AppComponent,
-        ContactRecordComponent,
-        DropdownDirective,
-        FooterComponent,
-        UserComponent,
-        UsersListComponent
+        DropdownDirective
     ],
     imports: [
         AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig),
         BrowserModule,
+        ContactRecordModule,
         FormsModule,
+        FooterModule,
         ReactiveFormsModule,
         AppRoutingModule,
         HeaderModule,
@@ -55,6 +53,8 @@ const myFirebaseAuthConfig = {
         HomeModule,
         QuestionListModule,
         UserAddModule,
+        UserModule,
+        UsersListModule,
         MaterialModule
     ],
     providers: [

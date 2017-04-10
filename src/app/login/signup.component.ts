@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MdSnackBar } from '@angular/material';
 
 import { AngularFire, FirebaseAuthState } from 'angularfire2';
+
+import { SnackBarComponent } from './snack-bar.component';
 
 @Component({
     selector: 'rb-signup',
@@ -10,25 +14,36 @@ import { AngularFire, FirebaseAuthState } from 'angularfire2';
 export class SignupComponent implements OnInit {
     error = false;
     errorMessage = '';
+    signupForm: FormGroup;
 
     constructor(
+      public snackBar: MdSnackBar,
       private router: Router,
-      private af: AngularFire) {}
+      public formBuilder: FormBuilder,
+      private af: AngularFire) {
+        let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
-    onSignup(formData: any) {
+        this.signupForm = this.formBuilder.group({
+          username: ['', [Validators.required, Validators.minLength(3)]],
+          adress: ['', [Validators.required, Validators.minLength(3)]],
+          telephone: ['', [Validators.required, Validators.minLength(6)]],
+          email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+        });
+      }
+
+    onSignup(signupForm: any) {
       this.af.auth.createUser({
-        email: formData.value.email,
-        password: formData.value.password
+        email: signupForm.value.email,
+        password: signupForm.value.password
       })
       .then((authState: FirebaseAuthState) => {
-          console.log(authState);
             this.router.navigate(['/signin']);
+            this.snackBar.openFromComponent( SnackBarComponent, {
+              duration: 3000,
+            });
           })
-
-      // .catch((error:any) => {
-      //     console.log(error.code);
-      //     console.log(error.message);
-      // });
     }
 
     ngOnInit(): any {
@@ -43,13 +58,8 @@ export class SignupComponent implements OnInit {
         //         this.isEqualPassword.bind(this)
         //     ])],
         // });
-    }
 
-    // isEmail(control: FormControl): {[s: string]: boolean} {
-    //     if (!control.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-    //         return {noEmail: true};
-    //     }
-    // }
+    }
 
     // isEqualPassword(control: FormControl): {[s: string]: boolean} {
     //     if (!this.myForm) {

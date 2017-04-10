@@ -1,28 +1,38 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 import { SignupComponent } from "./signup.component";
 import { SigninComponent } from "./signin.component";
-import { HeaderLoginComponent } from "./headerlogin.component";
+import { HeaderLoginComponent } from "./header-login.component";
+import { SnackBarComponent } from "./snack-bar.component";
 
 @NgModule({
     imports: [
+      BrowserModule,
       FormsModule,
       ReactiveFormsModule,
       CommonModule,
-      RouterModule
+      RouterModule,
+      MaterialModule
+    ],
+    entryComponents: [
+      SnackBarComponent
     ],
     declarations: [
       HeaderLoginComponent,
       SignupComponent,
-      SigninComponent
+      SigninComponent,
+      SnackBarComponent
     ],
     exports: [
       HeaderLoginComponent,
       SignupComponent,
-      SigninComponent
+      SigninComponent,
+      SnackBarComponent
     ],
 })
 export class HeaderLoginModule {}

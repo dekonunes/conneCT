@@ -18,7 +18,7 @@ export class UserService {
     private questionService: QuestionService) {
   }
 
-  addUser(newUser: User, uidCT:string) {
+  addUser(newUser: User , uidCT:string) {
     this.questions = this.questionService.getQuestion();
     this.af.database.object(`/${uidCT}/${newUser.id}`).set(newUser);
   }
@@ -49,5 +49,9 @@ export class UserService {
 
   getMessageContactRecord(uidCT:string, uidDQ:string): FirebaseListObservable<ContactRecord[]> {
     return this.af.database.list(`/${uidCT}/${uidDQ}/contacts`);
+  }
+
+  logOut() {
+    this.af.auth.logout();
   }
 }

@@ -1,7 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { AngularFire } from 'angularfire2';
-import { FirebaseListObservable } from 'angularfire2';
-import { MdDialog } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
@@ -10,7 +7,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { UserAddComponent } from "../users/user-add/user-add.component";
 import { User } from "../shared/user.model"
 import { UserService } from "../shared/user.service";
 
@@ -20,46 +16,54 @@ import { UserService } from "../shared/user.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  alphabet: string[] = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   uidCT: string;
-  users: Observable<User>;
-  user: User;
+  uidDQ: string = null;
+  users$: Observable<User[]>;
+  users: User[] = [];
+  filteredUsers: User[] = [];
   private termOfSearch: Subject<string> = new Subject<string>();
 
-  constructor(public dialog: MdDialog,
-              private af: AngularFire,
-              private router: Router,
+  constructor(private router: Router,
               private activatedRouter: ActivatedRoute,
-              private userService: UserService) {}
+              private userService: UserService) {
+      }
 
   ngOnInit() {
-    this.activatedRouter.params.subscribe((_params) => this.uidCT = _params['idCT']);
-
-    this.users = this.termOfSearch
+    this.inicializeUids();
+    this.users$ = this.termOfSearch
       .debounceTime(500)
       .distinctUntilChanged()
       .switchMap(term => term ? this.userService
-        .getSpecificUser(this.uidCT,term) : Observable.of<User>())
+        .getUsers(this.uidCT) : Observable.of<User[]>())
       .catch(err => {
       console.log(err);
-      return Observable.of<User>();
+      return Observable.of<User[]>();
     });
+    this.users$.subscribe((_user) => this.users = _user);
+  }
 
-    this.users.subscribe((_user) => this.user = _user);
+  inicializeUids() {
+    this.uidDQ = null;
+    this.activatedRouter.params.subscribe((_params) => this.uidCT = _params['idCT']);
+    this.activatedRouter.params.subscribe((_params) => this.uidDQ = _params['idDQ']);
+  }
+
+  filterStates(input: string) {
+    this.filteredUsers = this.users.filter(
+      _user => _user.name.toUpperCase().includes(input.toUpperCase()));
   }
 
   search(term: string) {
     this.termOfSearch.next(term);
+    this.filterStates(term);
   }
 
-  openDialog() {
-    this.dialog.open(UserAddComponent,this.uidCT)
-      .componentInstance.uidCT = this.uidCT;
+  navigate() {
+    this.router.navigate(['/users',this.uidCT]);
   }
 
   logout() {
-    this.af.auth.logout();
+    this.userService.logOut();
     this.router.navigateByUrl('/home');
   }
 
