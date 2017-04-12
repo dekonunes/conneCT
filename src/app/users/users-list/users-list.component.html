@@ -11,16 +11,20 @@
             </md-input-container>
         </form>
       </li>
-      <li *ngFor="let user of filteredUsers">
-        <div class="col-md-offset-1 col-md-10">
-          <a (click)="routerComponent(user.id)" class="list-group-item clearfix">
-            <h1>{{user.name}}</h1>
+      <li *ngFor="let user of filteredUsers" >
+        <div class="col-md-offset-1 col-md-10" >
+          <a (click)="routerComponent(user.id)" style="text-decoration: none !important;">
+            <div class="paddingCard">
+              <md-card class="colorCard " >
+                    <h1>{{user.name}}</h1>
+              </md-card>
+            </div>
           </a>
         </div>
-        <div style="padding: 35px 35px 35px 35px;color: white">.</div>
+        <div style="padding: 40px;color: white">.</div>
       </li>
     </ul>
-    <div style="padding: 35px 35px 35px 35px;color: white">.</div>
+    <div style="padding: 35px;color: white">.</div>
     <div *ngIf="users.length != 0">
       <button (click)="openDialog()" md-fab  class="buttonAdd"><md-icon>add</md-icon></button>
     <div>

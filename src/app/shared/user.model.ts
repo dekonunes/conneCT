@@ -1,5 +1,6 @@
 import { Question } from './question.model';
 import { Gamification } from './gamification.model';
+import { Answer } from './answer.model';
 
 export class User {
   constructor(
@@ -11,7 +12,10 @@ export class User {
     public telephoneOther: number,
     public gender: string,
     public birthday: string,
-    public questions?: Question[],
+    public uidCT: string,
+    public questions?: Question[]
+    // public answers?: Answer[],
+    // public gamification?: Gamification
     ) {
   }
 }

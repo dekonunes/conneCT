@@ -3,10 +3,6 @@ textarea {
     width: 100%;
 }
 
-.colorCard {
-  background-color: #fafafa;
-}
-
 .scrolling-content {
   display: block;
 font-family: monospace;

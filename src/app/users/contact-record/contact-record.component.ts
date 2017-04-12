@@ -20,7 +20,13 @@ export class ContactRecordComponent implements OnInit {
   constructor(
     private activatedRouter: ActivatedRoute,
     private userService: UserService,
-    public formBuilder: FormBuilder,) {}
+    public formBuilder: FormBuilder) {
+
+      this.contactForm = this.formBuilder.group({
+        nameContact: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+        messageContact: ['', [Validators.required]],
+      });
+    }
 
   ngOnInit() {
     this.activatedRouter.params.forEach((_params: Params) => {

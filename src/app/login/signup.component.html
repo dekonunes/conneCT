@@ -6,6 +6,7 @@
         <label for="username"><md-icon>store_mall_directory</md-icon> Nome da instituição</label>
         <md-input-container class="full-width">
           <input mdInput placeholder="Digite o nome da CT"
+            required
             name="username"
             formControlName="username">
         </md-input-container>
@@ -13,6 +14,7 @@
         <label for="adress"><md-icon>map</md-icon> Cidade da instituição</label>
         <md-input-container class="full-width">
           <input mdInput placeholder="Digite o nome da cidade"
+            required
             name="adress"
             formControlName="adress">
         </md-input-container>
@@ -20,6 +22,7 @@
         <label for="telephone"><md-icon>phone</md-icon> Telefone</label>
         <md-input-container class="full-width">
           <input mdInput placeholder="Digite um telefone"
+            required
             name="telephone"
             formControlName="telephone">
         </md-input-container>
@@ -27,6 +30,7 @@
          <label for="email"><md-icon>email</md-icon> E-mail</label>
          <md-input-container class="full-width">
            <input mdInput placeholder="Digite o e-mail"
+             required
              name="email"
              formControlName="email">
          </md-input-container>
@@ -35,6 +39,7 @@
           <label for="password"><md-icon>vpn_key</md-icon> Senha</label>
           <md-input-container class="full-width">
             <input mdInput placeholder="Digite a senha"
+              required
               name="password"
               type="password"
               formControlName="password">
@@ -43,12 +48,13 @@
           <label for="confirm-password"><md-icon>vpn_key</md-icon> Confirmação de senha</label>
           <md-input-container class="full-width">
             <input mdInput placeholder="Digite novamente a senha"
+              required
               name="confirmPassword"
               type="password"
               formControlName="confirmPassword">
           </md-input-container>
           <!-- <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span> -->
-      <button type="submit" [disabled]="!signupForm.valid" md-raised-button>Cadastrar</button>
+      <button type="submit" class="colorButton" [disabled]="!signupForm.valid" md-raised-button>Cadastrar</button>
   </form>
   <div style="padding: 35px;"></div>
 </div>

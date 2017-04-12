@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
 import { Observable } from "rxjs/Observable";
 
+
 import { Question } from '../../shared/question.model';
 import { User } from "../../shared/user.model"
 import { UserService } from "../../shared/user.service";
@@ -16,6 +17,7 @@ export class UserComponent implements OnInit {
   uidCT: string;
   user: User;
 
+
   constructor(
     private activatedRouter: ActivatedRoute,
     private userService: UserService
@@ -28,6 +30,8 @@ export class UserComponent implements OnInit {
     });
 
     this.userService.getUser(this.uidCT,this.uidDQ).first()
-    .subscribe(_user =>  this.user = _user);
+    .subscribe(_user => {
+      this.user = _user;
+    });
   }
 }

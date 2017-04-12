@@ -58,6 +58,12 @@ export class HeaderComponent implements OnInit {
     this.filterStates(term);
   }
 
+  routerComponent(userUID: string) {
+    this.router.navigateByUrl(`/users/user/${this.uidCT}/${userUID}`);
+    if(this.uidDQ != null)
+      location.reload();
+  }
+
   navigate() {
     this.router.navigate(['/users',this.uidCT]);
   }

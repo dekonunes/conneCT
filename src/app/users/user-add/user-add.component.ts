@@ -71,7 +71,8 @@ export class UserAddComponent {
           formData.value.otherPhone,
           formData.value.gender,
           formData.value.birthday,
-          (this.questionService.getQuestion()))
+          this.uidCT,
+          this.questionService.getQuestion())
             ,this.uidCT);
           this.dialogRef.close();
       })

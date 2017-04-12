@@ -5,9 +5,9 @@
   <md-input-container>
     <input mdInput placeholder="Busca" [mdAutocomplete]="auto" (input)="search($event.target.value)">
   </md-input-container>
-  <md-autocomplete #auto="mdAutocomplete">
-    <md-option *ngFor="let user of filteredUsers" [value]="state">
-      {{ user.name }}
+  <md-autocomplete  #auto="mdAutocomplete">
+    <md-option *ngFor="let user of filteredUsers" [value]="user.name" (click)="routerComponent(user.id)">
+      <a (click)="routerComponent(user.id)">{{ user.name }}</a>
     </md-option>
   </md-autocomplete>
   <button md-icon-button [mdMenuTriggerFor]="menu">

@@ -10,10 +10,22 @@
     transform: scale(1.2);
 }
 
+.colorButton {
+  background-color: #ffd740 !important;
+}
+
 .full-width {
   width: 100%;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 .colorCard {
-  background-color: #fafafa;
+  background-color: #fafafa !important;
+}
+
+.paddingCard {
+  padding-bottom: 15px !important;
 }

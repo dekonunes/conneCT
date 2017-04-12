@@ -8,6 +8,7 @@
           <br>
           <md-input-container class="full-width">
             <input mdInput placeholder="Insira o e-mail"
+              required
               name="email"
               formControlName="email">
           </md-input-container>
@@ -22,6 +23,7 @@
           <br>
           <md-input-container class="full-width">
             <input type="password" mdInput
+              required
               placeholder="Insira a senha"
               name="password"
               formControlName="password">
@@ -33,6 +35,6 @@
              </div> -->
       </div>
       <br>
-      <button type="submit" [disabled]="signinForm.invalid" md-raised-button>Entrar</button>
+      <button type="submit" class="colorButton" [disabled]="signinForm.invalid" md-raised-button>Entrar</button>
   </form>
 </div>

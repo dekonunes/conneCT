@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { ContactRecordComponent } from "./contact-record.component";
 
@@ -11,7 +11,8 @@ import { ContactRecordComponent } from "./contact-record.component";
       BrowserModule,
       BrowserAnimationsModule,
       FormsModule,
-      MaterialModule
+      MaterialModule,
+      ReactiveFormsModule
     ],
     declarations: [
       ContactRecordComponent

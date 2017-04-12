@@ -1,20 +1,17 @@
-<ul class="list-group list-unstyled" >
-    <div class="col-md-12" *ngFor="let question of _questions">
-      <div class="col-md-12">
-          <a class="list-group-item clearfix" >
-              <div class="col-sm-9 col-xs-12 " >
-                  <h2 class="list-group-item-text dimension" style="color: #cc000c" align="center">{{question.title}}</h2>
-                  <!-- <h3 class="list-group-item-heading" style="color: #cc000c">{{question.description}}</h3> -->
-              </div>
-              <div class="col-sm-3 col-xs-12 " >
-              </div>
-              <rb-answers></rb-answers>
-              <!-- <rb-graphic-answers></rb-graphic-answers>
-              <rb-graphic-periodicity></rb-graphic-periodicity> -->
-          </a>
-          <!--<alert type="info" [collapse]="isCollapsed" >-->
-          <!--</alert>-->
-      </div>
-    </div>
-</ul>
+<div class="paddingCard" *ngFor="let question of _questions; let i = index;">
+  <md-card class="colorCard " >
+    <a >
+        <h2 style="color: #cc000c" align="center">
+          {{question.title}}
+          <img src="assets/images/iconsQuestions/icon{{i}}.jpg" align="right">
+        </h2>
+
+            <!-- <h3 class="list-group-item-heading" style="color: #cc000c">{{question.description}}</h3> -->
+        <!-- <rb-graphic-answers></rb-graphic-answers>
+        <rb-graphic-periodicity></rb-graphic-periodicity> -->
+    </a>
+    <!--<alert type="info" [collapse]="isCollapsed" >-->
+    <!--</alert>-->
+  </md-card>
+</div>
 <div style="padding: 35px;color: white">.</div>

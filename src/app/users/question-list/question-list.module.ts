@@ -4,7 +4,6 @@ import { MaterialModule } from '@angular/material';
 
 import { GraphicAnswersModule } from "./graphic-answers/graphic-answers.module"
 import { GraphicPeriodicityModule } from "./graphic-periodicity/graphic-periodicity.module"
-import { AnswersModule } from "./answersOfUser/answersOfUser.module"
 import { QuestionListComponent } from "./question-list.component";
 
 
@@ -13,7 +12,6 @@ import { QuestionListComponent } from "./question-list.component";
         QuestionListComponent,
     ],
     imports: [
-        AnswersModule,
         BrowserModule,
         GraphicAnswersModule,
         GraphicPeriodicityModule,

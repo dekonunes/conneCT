@@ -4,15 +4,14 @@
     </md-card-title>
   <md-card>
   <md-card-content>
-    <form #contactForm='ngForm' (ngSubmit)="onSubmit(contactForm)" novalidade>
+    <form [formGroup]='contactForm' (ngSubmit)="onSubmit(contactForm); $event.preventDefault()" novalidade>
       <ul class="list-unstyled">
         <li><md-icon>person</md-icon>Contactante:</li>
           <md-input-container class="full-width">
             <input mdInput placeholder="Insira o seu nome:"
               required
-              #nameContact="ngModel"
               name="nameContact"
-              (ngModel)="nameContact"
+              formControlName="nameContact"
               mdInput>
           </md-input-container>
         <li><md-icon>note_add</md-icon>Histórico do contato:</li>
@@ -21,25 +20,27 @@
             <textarea type="text"
               placeholder="Insira o que foi conversado no contato."
               required
-              
               name="messageContact"
+              formControlName="messageContact"
               mdInput>
             </textarea>
           </md-input-container>
         </li>
       </ul>
     <md-card-actions>
-      <button type="submit" md-raised-button name="button">Enviar</button>
+      <button class="colorButton" type="submit" [disabled]="contactForm.invalid" md-raised-button name="button">Enviar</button>
     </md-card-actions>
     </form>
   </md-card-content>
   </md-card>
-<md-divider></md-divider>
-<md-card-title>
+<div class="paddingCard"></div>
+<md-card-title >
   <b>Histórico do contato</b>
 </md-card-title>
-  <md-card *ngFor="let messageContact of messagesContactRecord">
-      <h4 ><md-icon>person</md-icon>{{messageContact.nameContact}}</h4>
-      <div><md-icon>note_add</md-icon><p>{{messageContact.message}}</p></div>
-  </md-card>
+  <div class="paddingCard" *ngFor="let messageContact of messagesContactRecord">
+    <md-card>
+        <h4 ><md-icon>person</md-icon>{{messageContact.nameContact}}</h4>
+        <div><md-icon>note_add</md-icon><p>{{messageContact.message}}</p></div>
+    </md-card>
+  </div>
 </md-card>
