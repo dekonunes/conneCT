@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
     error = false;
     errorMessage = '';
     signupForm: FormGroup;
+    checked = false;
 
     constructor(
       public snackBar: MdSnackBar,
@@ -29,7 +30,8 @@ export class SignupComponent implements OnInit {
           telephone: ['', [Validators.required, Validators.minLength(6)]],
           email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
           password: ['', [Validators.required, Validators.minLength(6)]],
-          confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+          confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+          checkBoxDisclosure: ['', Validators.required]
         });
       }
 

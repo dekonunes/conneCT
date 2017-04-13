@@ -13,8 +13,8 @@ export class User {
     public gender: string,
     public birthday: string,
     public uidCT: string,
-    public questions?: Question[]
-    // public answers?: Answer[],
+    public questions?: Question[],
+    public answers?: Answer[]
     // public gamification?: Gamification
     ) {
   }

@@ -1,8 +1,12 @@
 footer, p, a {
-    color: white;
+  color: white;
+}
+
+footer a {
+  cursor: pointer;
 }
 footer li {
-    margin-left: -9px;
+  margin-left: -9px;
 }
 footer {
   position:fixed;

@@ -28,8 +28,8 @@ export class UserAddComponent {
 
     constructor(
       private activatedRouter: ActivatedRoute,
-      iconRegistry: MdIconRegistry,
-      sanitizer: DomSanitizer,
+      private iconRegistry: MdIconRegistry,
+      private sanitizer: DomSanitizer,
       private af: AngularFire,
       public dialogRef: MdDialogRef<UserAddComponent>,
       public formBuilder: FormBuilder,

@@ -6,6 +6,7 @@ import { User } from './user.model';
 import { ContactRecord } from './contact-record.model';
 import { QuestionService } from "../shared/question.service";
 import { Question } from "../shared/question.model";
+import { Answer } from "../shared/answer.model";
 
 
 @Injectable()
@@ -21,6 +22,10 @@ export class UserService {
   addUser(newUser: User , uidCT:string) {
     this.questions = this.questionService.getQuestion();
     this.af.database.object(`/${uidCT}/${newUser.id}`).set(newUser);
+  }
+
+  getAnwers(uidCT:string, uidDQ:string): FirebaseListObservable<any[]> {
+    return this.af.database.list(`/${uidCT}/${uidDQ}/answers`);
   }
 
   getUsers(uidCT:string): FirebaseListObservable<User[]> {

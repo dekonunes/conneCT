@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+
+import { DisclosureComponent } from './disclosure/disclosure.component';
+import { CreditsComponent } from './credits/credits.component';
 
 @Component({
   selector: 'rb-footer',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialog: MdDialog
+  ) { }
 
   ngOnInit() {
+  }
+
+  openDialogDisclosure() {
+    this.dialog.open(DisclosureComponent);
+  }
+
+  openDialogCredits() {
+    this.dialog.open(CreditsComponent);
   }
 
 }

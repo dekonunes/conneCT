@@ -1,4 +1,7 @@
 export class Answer {
-  constructor(questionID: number, answersNumber: number, date: string) {
+  constructor(
+    public questionID: number,
+    public answersNumber: number,
+    public date: string) {
   }
 }

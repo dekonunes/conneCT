@@ -5,3 +5,10 @@ a {
 .spacePAD {
     margin-right: 5%;
 }
+
+.answersIcon{
+  height: 60%;
+  width: 6%;
+  position:absolute;top: 18%;
+  right: 2%;
+}

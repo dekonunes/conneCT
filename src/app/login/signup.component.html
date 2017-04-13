@@ -53,8 +53,12 @@
               type="password"
               formControlName="confirmPassword">
           </md-input-container>
-          <!-- <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span> -->
-      <button type="submit" class="colorButton" [disabled]="!signupForm.valid" md-raised-button>Cadastrar</button>
+          <md-checkbox formControlName="checkBoxDisclosure" required [(ngModel)]="checked">
+            Eu li e aceito os <a>termos de uso</a>.
+          </md-checkbox>
+          <br>
+          <br>
+          <button type="submit" class="colorButton" [disabled]="!signupForm.valid || !checked" md-raised-button>Cadastrar</button>
   </form>
   <div style="padding: 35px;"></div>
 </div>

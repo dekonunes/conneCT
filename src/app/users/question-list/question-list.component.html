@@ -1,17 +1,18 @@
 <div class="paddingCard" *ngFor="let question of _questions; let i = index;">
+  <a >
   <md-card class="colorCard " >
-    <a >
-        <h2 style="color: #cc000c" align="center">
-          {{question.title}}
-          <img src="assets/images/iconsQuestions/icon{{i}}.jpg" align="right">
-        </h2>
 
+     <h2>
+       {{question.title}}
+       <img src="assets/images/iconsQuestions/icon1.jpg" class="answersIcon">
+     </h2>
             <!-- <h3 class="list-group-item-heading" style="color: #cc000c">{{question.description}}</h3> -->
         <!-- <rb-graphic-answers></rb-graphic-answers>
         <rb-graphic-periodicity></rb-graphic-periodicity> -->
-    </a>
+
     <!--<alert type="info" [collapse]="isCollapsed" >-->
     <!--</alert>-->
   </md-card>
+  </a>
 </div>
 <div style="padding: 35px;color: white">.</div>

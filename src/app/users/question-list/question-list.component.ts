@@ -15,7 +15,8 @@ export class QuestionListComponent implements OnInit{
     @Input() _questions: Question[];
     uidDQ: string;
     uidCT: string;
-    answers: Answer[];
+    answers: Answer[][] = [];
+    answerss: Answer;
 
     constructor(
       private userService: UserService,
@@ -28,10 +29,12 @@ export class QuestionListComponent implements OnInit{
         this.uidCT = _params['idCT'];
       });
 
-      this.userService.getUser(this.uidCT,this.uidDQ).first()
-      .subscribe(_user =>  {
-        this.answers = _user.answers
-        // console.log(this.answers['-KhRHHSJeSvAa6PC9tve']);
+      this.userService.getAnwers(this.uidCT,this.uidDQ)
+        .forEach(_user =>  {
+          this.answers = _user
+          // _user.forEach((_uds:Answer) => {console.log(_uds)})
+          console.log(this.answers);
+          this.answers.forEach((_sss:Answer[]) => console.log(_sss[0]))
       });
 
 
