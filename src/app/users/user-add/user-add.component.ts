@@ -1,13 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params} from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AngularFire } from 'angularfire2';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { User } from "../../shared/user.model"
+import { Answer } from "../../shared/answer.model"
 import { MdDialogRef, MdIconRegistry } from "@angular/material";
+import { User } from "../../shared/user.model"
 import { UserService } from "../../shared/user.service";
 import { QuestionService } from "../../shared/question.service";
+
 
 
 @Component({
@@ -57,6 +59,7 @@ export class UserAddComponent {
     }
 
     onSubmit(formData: any) {
+      let answers: Answer[] = [];
       this.af.auth.createUser({
         email: formData.value.email,
         password: formData.value.password
@@ -72,7 +75,8 @@ export class UserAddComponent {
           formData.value.gender,
           formData.value.birthday,
           this.uidCT,
-          this.questionService.getQuestion())
+          this.questionService.getQuestion(),
+          answers)
             ,this.uidCT);
           this.dialogRef.close();
       })

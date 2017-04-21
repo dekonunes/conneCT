@@ -7,7 +7,7 @@
 </div>
 <div class="col-md-8">
   <div *ngIf="user">
-    <rb-question-list [_questions]="user.questions"></rb-question-list>
+    <rb-question-list [_questions]="user.questions" [_answers]="user.answers"></rb-question-list>
   </div>
 </div>
 <div class="col-md-4" >

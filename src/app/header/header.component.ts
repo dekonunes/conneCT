@@ -25,21 +25,20 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router,
               private activatedRouter: ActivatedRoute,
-              private userService: UserService) {
-      }
+              private userService: UserService) {}
 
   ngOnInit() {
     this.inicializeUids();
-    this.users$ = this.termOfSearch
-      .debounceTime(500)
-      .distinctUntilChanged()
-      .switchMap(term => term ? this.userService
-        .getUsers(this.uidCT) : Observable.of<User[]>())
-      .catch(err => {
-      console.log(err);
-      return Observable.of<User[]>();
-    });
-    this.users$.subscribe((_user) => this.users = _user);
+    // this.users$ = this.termOfSearch
+    //   .debounceTime(500)
+    //   .distinctUntilChanged()
+    //   .switchMap(term => term ? this.userService
+    //     .getUsers(this.uidCT) : Observable.of<User[]>())
+    //   .catch(err => {
+    //   console.log(err);
+    //   return Observable.of<User[]>();
+    // });
+    // this.users$.subscribe((_user) => this.users = _user);
   }
 
   inicializeUids() {
@@ -48,15 +47,15 @@ export class HeaderComponent implements OnInit {
     this.activatedRouter.params.subscribe((_params) => this.uidDQ = _params['idDQ']);
   }
 
-  filterStates(input: string) {
-    this.filteredUsers = this.users.filter(
-      _user => _user.name.toUpperCase().includes(input.toUpperCase()));
-  }
+  // filterStates(input: string) {
+  //   this.filteredUsers = this.users.filter(
+  //     _user => _user.name.toUpperCase().includes(input.toUpperCase()));
+  // }
 
-  search(term: string) {
-    this.termOfSearch.next(term);
-    this.filterStates(term);
-  }
+  // search(term: string) {
+  //   this.termOfSearch.next(term);
+  //   this.filterStates(term);
+  // }
 
   routerComponent(userUID: string) {
     this.router.navigateByUrl(`/users/user/${this.uidCT}/${userUID}`);

@@ -24,10 +24,6 @@ export class UserService {
     this.af.database.object(`/${uidCT}/${newUser.id}`).set(newUser);
   }
 
-  getAnwers(uidCT:string, uidDQ:string): FirebaseListObservable<any[]> {
-    return this.af.database.list(`/${uidCT}/${uidDQ}/answers`);
-  }
-
   getUsers(uidCT:string): FirebaseListObservable<User[]> {
     return this.af.database.list(`/${uidCT}`);
   }
@@ -36,7 +32,7 @@ export class UserService {
     return this.af.database.object(`/${uidCT}/${uidDQ}`);
   }
 
-  getSpecificUser(uidCT:string, key:string): Observable<User> { //: FirebaseObjectObservable<User> {
+  getSpecificUser(uidCT:string, key:string): Observable<User> {
     let uidDQ:string;
     this.af.database.list(`/${uidCT}`)
       .forEach((users) => {
