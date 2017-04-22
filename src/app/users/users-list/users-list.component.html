@@ -1,6 +1,17 @@
 <rb-header></rb-header>
-<div class="col-md-12">
+<div style="width:100%">
+  <md-progress-spinner
+    *ngIf="isSpinner"
+    class="centerSpinner"
+    color="accent"
+    mode="indeterminate">
+  </md-progress-spinner>
+</div>
+
+<div class="col-md-12" *ngIf="!isSpinner">
+
     <ul class="list-group list-unstyled">
+
       <li *ngIf="users.length == 0" class="col-md-offset-1 col-md-10" align="center">
         <h2>Nenhum companheiro encontrado, adicione apertando no botão <button (click)="openDialog()" md-fab><md-icon>add</md-icon></button></h2>
       </li>

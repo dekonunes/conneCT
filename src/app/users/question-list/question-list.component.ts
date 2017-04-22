@@ -12,15 +12,20 @@ export class QuestionListComponent implements OnInit{
     @Input() _questions: Question[];
     @Input() _answers: Answer[][];
     answers: Answer[] = [];
+    collapse: boolean = false;
+    numberQuestion: number;
     constructor() {}
 
     ngOnInit() {
       let lastProperty: any;
       if(this._answers) {
-      for (lastProperty in this._answers){}
-      console.log(this._answers[lastProperty])
-
+        for (lastProperty in this._answers){}
         this.answers = this._answers[lastProperty];
-        }
+      }
+    }
+
+    collapseDescription(index: number) {
+      this.numberQuestion = index;
+      this.collapse = !this.collapse;
     }
 }

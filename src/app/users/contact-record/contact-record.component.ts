@@ -36,14 +36,17 @@ export class ContactRecordComponent implements OnInit {
     this.getMessagensRecord();
   }
 
+  onScroll(event: any) {
+    console.log('scroll event', event);
+  }
+
   onSubmit(formData: any) {
-    let date = new Date();
     this.userService.addMessageContactRecord(
       this.uidCT,
       this.uidDQ,
        new ContactRecord(
          formData.value.nameContact,
-         date,
+         new Date().toString(),
          formData.value.messageContact));
     this.getMessagensRecord();
   }
@@ -53,7 +56,6 @@ export class ContactRecordComponent implements OnInit {
   }
 
   getMessagensRecord() {
-    let date = new Date();
     this.userService.getMessageContactRecord(this.uidCT,this.uidDQ)
       .subscribe(_messagesContactRecord => {
         this.messagesContactRecord = _messagesContactRecord

@@ -23,6 +23,10 @@ export class UsersListComponent implements OnInit{
   users$: Observable<User[]>;
   users: User[] = [];
   filteredUsers: User[] = [];
+  isSpinner: boolean = true;
+  color: string = 'accent';
+  mode = 'indeterminate';
+  value = 50;
   private termOfSearch: Subject<string> = new Subject<string>();
 
   constructor(
@@ -61,6 +65,7 @@ export class UsersListComponent implements OnInit{
       if(_users.length != this.users.length)
         this.users = this.filteredUsers = _users;
       this.sortArray();
+      this.isSpinner = false;
     })
   }
 

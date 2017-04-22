@@ -16,8 +16,7 @@ export class UserComponent implements OnInit {
   uidDQ: string;
   uidCT: string;
   user: User;
-
-
+  
   constructor(
     private activatedRouter: ActivatedRoute,
     private userService: UserService

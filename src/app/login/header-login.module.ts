@@ -9,6 +9,7 @@ import { SignupComponent } from "./signup.component";
 import { SigninComponent } from "./signin.component";
 import { HeaderLoginComponent } from "./header-login.component";
 import { SnackBarComponent } from "./snack-bar.component";
+import { DialogErrorComponent } from '../shared/dialog-error.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import { SnackBarComponent } from "./snack-bar.component";
       MaterialModule
     ],
     entryComponents: [
-      SnackBarComponent
+      SnackBarComponent      
     ],
     declarations: [
       HeaderLoginComponent,

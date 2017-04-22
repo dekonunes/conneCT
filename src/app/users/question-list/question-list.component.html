@@ -1,6 +1,6 @@
-<div class="paddingCard" *ngFor="let question of _questions;let i = index">
-  <a >
-  <md-card class="colorCard " >
+<div class="paddingCard" *ngFor="let question of _questions;let i = index" (click)="collapseDescription(i)">
+<a>
+    <md-card class="colorCard" >
      <h2>
        {{question.title}}
        <img *ngIf="answers[i]" src="assets/images/iconsQuestions/icon{{answers[i].answersNumber}}.jpg" class="answersIcon">
@@ -8,6 +8,11 @@
         <!-- <rb-graphic-answers></rb-graphic-answers>
         <rb-graphic-periodicity></rb-graphic-periodicity> -->
   </md-card>
-  </a>
+</a>
+<md-card class="colorCard" *ngIf="collapse && (numberQuestion == i)">
+ <h2>
+   {{question.description}}
+ </h2>
+</md-card>
 </div>
 <div style="padding: 35px;color: white">.</div>

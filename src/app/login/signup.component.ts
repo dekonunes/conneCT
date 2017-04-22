@@ -2,10 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MdSnackBar } from '@angular/material';
+import { MdDialog } from '@angular/material';
 
 import { AngularFire, FirebaseAuthState } from 'angularfire2';
 
 import { SnackBarComponent } from './snack-bar.component';
+import { DialogErrorComponent } from '../shared/dialog-error.component';
 
 @Component({
     selector: 'rb-signup',
@@ -18,9 +20,10 @@ export class SignupComponent implements OnInit {
     checked = false;
 
     constructor(
-      public snackBar: MdSnackBar,
+      private dialog: MdDialog,
+      private snackBar: MdSnackBar,
       private router: Router,
-      public formBuilder: FormBuilder,
+      private formBuilder: FormBuilder,
       private af: AngularFire) {
         let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
@@ -45,6 +48,9 @@ export class SignupComponent implements OnInit {
             this.snackBar.openFromComponent( SnackBarComponent, {
               duration: 3000,
             });
+          }).catch((error: Error) => {
+            this.dialog.open(DialogErrorComponent)
+              .componentInstance.error = error;
           })
     }
 

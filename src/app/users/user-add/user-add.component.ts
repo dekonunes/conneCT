@@ -5,11 +5,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { Answer } from "../../shared/answer.model"
-import { MdDialogRef, MdIconRegistry } from "@angular/material";
+import { MdDialogRef, MdIconRegistry, MdDialog } from "@angular/material";
 import { User } from "../../shared/user.model"
 import { UserService } from "../../shared/user.service";
 import { QuestionService } from "../../shared/question.service";
-
+import { DialogErrorComponent } from "../../shared/dialog-error.component";
 
 
 @Component({
@@ -18,8 +18,6 @@ import { QuestionService } from "../../shared/question.service";
     styleUrls: ['./user-add.component.css']
 })
 export class UserAddComponent {
-    @Input() user: User;
-
     uidCT:string;
     newUserForm: FormGroup;
 
@@ -33,6 +31,7 @@ export class UserAddComponent {
       private iconRegistry: MdIconRegistry,
       private sanitizer: DomSanitizer,
       private af: AngularFire,
+      private dialog: MdDialog,
       public dialogRef: MdDialogRef<UserAddComponent>,
       public formBuilder: FormBuilder,
       private userService: UserService,
@@ -59,7 +58,6 @@ export class UserAddComponent {
     }
 
     onSubmit(formData: any) {
-      let answers: Answer[] = [];
       this.af.auth.createUser({
         email: formData.value.email,
         password: formData.value.password
@@ -76,9 +74,12 @@ export class UserAddComponent {
           formData.value.birthday,
           this.uidCT,
           this.questionService.getQuestion(),
-          answers)
+          null)
             ,this.uidCT);
           this.dialogRef.close();
+      }).catch((error: Error) => {
+        this.dialog.open(DialogErrorComponent)
+          .componentInstance.error = error;
       })
     }
 }

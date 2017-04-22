@@ -8,7 +8,7 @@ import 'hammerjs';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppComponent } from "./app.component";
 import { ContactRecordModule } from "./users/contact-record/contact-record.module";
-import { DropdownDirective } from "./shared/dropdown.directive";
+import { DialogErrorComponent } from "./shared/dialog-error.component";
 import { UserService } from "./shared/user.service";
 import { FooterModule } from "./footer/footer.module"
 import { HeaderModule } from "./header/header.module";
@@ -37,8 +37,11 @@ const myFirebaseAuthConfig = {
 @NgModule({
     declarations: [
         AppComponent,
-        DropdownDirective
+        DialogErrorComponent
     ],
+    entryComponents: [
+      DialogErrorComponent
+    ],      
     imports: [
         AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig),
         BrowserModule,
