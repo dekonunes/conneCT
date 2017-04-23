@@ -16,6 +16,7 @@ import { UserService } from "../shared/user.service";
 })
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
+    checkedCheckBox = false;
 
     constructor(
       private authService: AuthService,

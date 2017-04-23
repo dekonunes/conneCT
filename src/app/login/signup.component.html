@@ -53,12 +53,12 @@
               type="password"
               formControlName="confirmPassword">
           </md-input-container>
-          <md-checkbox formControlName="checkBoxDisclosure" required [(ngModel)]="checked">
+          <md-checkbox formControlName="checkBoxDisclosure" required [(ngModel)]="checkedCheckBox">
             Eu li e aceito os <a>termos de uso</a>.
           </md-checkbox>
           <br>
           <br>
-          <button type="submit" class="colorButton" [disabled]="!signupForm.valid || !checked" md-raised-button>Cadastrar</button>
+          <button type="submit" class="colorButton" [disabled]="!signupForm.valid || !checkedCheckBox" md-raised-button>Cadastrar</button>
   </form>
   <div style="padding: 35px;"></div>
 </div>
