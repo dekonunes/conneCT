@@ -67,10 +67,12 @@
                 <div class="col-sm-5">
                   <label><md-icon svgIcon="gender"></md-icon>Sexo</label>
                   <br>
-                  <md-radio-group>
-                    <md-radio-button *ngFor="let gender of genders" [value]="gender"
-                    required>
-                      {{gender}}
+                  <md-radio-group formControlName="gender" >
+                    <md-radio-button value="Masculino">
+                      Masculino
+                    </md-radio-button>
+                    <md-radio-button value="Feminino">
+                      Feminino
                     </md-radio-button>
                   </md-radio-group>
                 </div>

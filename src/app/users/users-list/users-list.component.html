@@ -13,7 +13,8 @@
     <ul class="list-group list-unstyled">
 
       <li *ngIf="users.length == 0" class="col-md-offset-1 col-md-10" align="center">
-        <h2>Nenhum companheiro encontrado, adicione apertando no botão <button (click)="openDialog()" md-fab><md-icon>add</md-icon></button></h2>
+        <h2>Nenhum companheiro encontrado, adicione apertando no botão
+          <button (click)="openDialog()" md-fab><md-icon>add</md-icon></button></h2>
       </li>
       <li *ngIf="users.length != 0">
         <form class="col-md-offset-1 col-md-10" role="search">

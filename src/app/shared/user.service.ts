@@ -3,6 +3,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Observable } from "rxjs/Observable";
 
 import { User } from './user.model';
+import { UserCT } from './userCT.model';
 import { ContactRecord } from './contact-record.model';
 import { QuestionService } from "../shared/question.service";
 import { Question } from "../shared/question.model";
@@ -19,17 +20,20 @@ export class UserService {
     private questionService: QuestionService) {
   }
 
-  addUser(newUser: User , uidCT:string) {
-    this.questions = this.questionService.getQuestion();
-    this.af.database.object(`/${uidCT}/${newUser.id}`).set(newUser);
+  addUserCT(newUser: UserCT, uidCT:string) {
+    this.af.database.object(`/${uidCT}/data`).set(newUser);
+  }
+
+  addUserDQ(newUser: User, uidCT:string) {
+    this.af.database.object(`/${uidCT}/users/${newUser.id}`).set(newUser);
   }
 
   getUsers(uidCT:string): FirebaseListObservable<User[]> {
-    return this.af.database.list(`/${uidCT}`);
+    return this.af.database.list(`/${uidCT}/users`);
   }
 
   getUser(uidCT:string, uidDQ:string): FirebaseObjectObservable<User> {
-    return this.af.database.object(`/${uidCT}/${uidDQ}`);
+    return this.af.database.object(`/${uidCT}/users/${uidDQ}`);
   }
 
   getSpecificUser(uidCT:string, key:string): Observable<User> {
@@ -41,15 +45,15 @@ export class UserService {
             uidDQ = user.id;
         })
       })
-    return this.af.database.object(`/${uidCT}/${uidDQ}`);
+    return this.af.database.object(`/${uidCT}/users/${uidDQ}`);
   }
 
   addMessageContactRecord(uidCT:string, uidDQ:string, contact: ContactRecord) {
-    this.af.database.list(`/${uidCT}/${uidDQ}/contacts`).push(contact);
+    this.af.database.list(`/${uidCT}/users/${uidDQ}/contacts`).push(contact);
   }
 
   getMessageContactRecord(uidCT:string, uidDQ:string): FirebaseListObservable<ContactRecord[]> {
-    return this.af.database.list(`/${uidCT}/${uidDQ}/contacts`);
+    return this.af.database.list(`/${uidCT}/users/${uidDQ}/contacts`);
   }
 
   logOut() {

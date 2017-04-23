@@ -1,30 +1,29 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MdSnackBar } from '@angular/material';
-import { MdDialog } from '@angular/material';
+import { MdSnackBar, MdDialog } from '@angular/material';
 
-import { AngularFire, FirebaseAuthState } from 'angularfire2';
-
+import { FirebaseAuthState } from 'angularfire2';
+import { AuthService } from "../shared/auth.service";
 import { SnackBarComponent } from './snack-bar.component';
 import { DialogErrorComponent } from '../shared/dialog-error.component';
+import { UserCT } from '../shared/userCT.model';
+import { UserService } from "../shared/user.service";
 
 @Component({
     selector: 'rb-signup',
     templateUrl: "./signup.component.html"
 })
 export class SignupComponent implements OnInit {
-    error = false;
-    errorMessage = '';
     signupForm: FormGroup;
-    checked = false;
 
     constructor(
+      private authService: AuthService,
       private dialog: MdDialog,
       private snackBar: MdSnackBar,
       private router: Router,
-      private formBuilder: FormBuilder,
-      private af: AngularFire) {
+      private userService: UserService,
+      private formBuilder: FormBuilder) {
         let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
         this.signupForm = this.formBuilder.group({
@@ -38,20 +37,25 @@ export class SignupComponent implements OnInit {
         });
       }
 
-    onSignup(signupForm: any) {
-      this.af.auth.createUser({
-        email: signupForm.value.email,
-        password: signupForm.value.password
-      })
-      .then((authState: FirebaseAuthState) => {
-            this.router.navigate(['/signin']);
-            this.snackBar.openFromComponent( SnackBarComponent, {
-              duration: 3000,
-            });
-          }).catch((error: Error) => {
-            this.dialog.open(DialogErrorComponent)
-              .componentInstance.error = error;
-          })
+    onSignup(signupForm: FormGroup) {
+      this.authService.createAuthUser(signupForm.value)
+        .then((authState: FirebaseAuthState) => {
+          this.userService.addUserCT(new UserCT(
+            authState.uid,
+            signupForm.value.username,
+            signupForm.value.email,
+            signupForm.value.password,
+            signupForm.value.telephone,
+            signupForm.value.adress
+          ), authState.uid)
+          this.router.navigate(['/signin']);
+          this.snackBar.openFromComponent( SnackBarComponent, {
+            duration: 3000,
+          });
+        }).catch((error: Error) => {
+          this.dialog.open(DialogErrorComponent)
+            .componentInstance.error = error;
+        })
     }
 
     ngOnInit(): any {

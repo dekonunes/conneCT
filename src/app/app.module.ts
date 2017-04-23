@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { AuthService } from "./shared/auth.service";
 import { AppComponent } from "./app.component";
 import { ContactRecordModule } from "./users/contact-record/contact-record.module";
 import { DialogErrorComponent } from "./shared/dialog-error.component";
@@ -41,7 +42,7 @@ const myFirebaseAuthConfig = {
     ],
     entryComponents: [
       DialogErrorComponent
-    ],      
+    ],
     imports: [
         AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig),
         BrowserModule,
@@ -61,6 +62,7 @@ const myFirebaseAuthConfig = {
         MaterialModule
     ],
     providers: [
+        AuthService,
         QuestionService,
         UserService
     ],

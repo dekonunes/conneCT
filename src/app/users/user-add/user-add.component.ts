@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import { AngularFire } from 'angularfire2';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { Answer } from "../../shared/answer.model"
+import { AuthService } from "../../shared/auth.service";
 import { MdDialogRef, MdIconRegistry, MdDialog } from "@angular/material";
 import { User } from "../../shared/user.model"
 import { UserService } from "../../shared/user.service";
@@ -28,9 +28,9 @@ export class UserAddComponent {
 
     constructor(
       private activatedRouter: ActivatedRoute,
+      private authService: AuthService,
       private iconRegistry: MdIconRegistry,
       private sanitizer: DomSanitizer,
-      private af: AngularFire,
       private dialog: MdDialog,
       public dialogRef: MdDialogRef<UserAddComponent>,
       public formBuilder: FormBuilder,
@@ -46,8 +46,8 @@ export class UserAddComponent {
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         phone: ['', [Validators.required, Validators.minLength(6)]],
         otherPhone: ['', [Validators.required, Validators.minLength(6)]],
-        gender: [''],
-        birthday: ['']
+        gender: ['', Validators.required],
+        birthday: ['', Validators.required]
       });
       iconRegistry.addSvgIcon(
         'gender',
@@ -58,25 +58,23 @@ export class UserAddComponent {
     }
 
     onSubmit(formData: any) {
-      this.af.auth.createUser({
-        email: formData.value.email,
-        password: formData.value.password
-      }).then(
-        (success) => {
-        this.userService.addUser(new User(
-          success.uid,
-          formData.value.username,
-          formData.value.email,
-          formData.value.password,
-          formData.value.phone,
-          formData.value.otherPhone,
-          formData.value.gender,
-          formData.value.birthday,
-          this.uidCT,
-          this.questionService.getQuestion(),
-          null)
-            ,this.uidCT);
-          this.dialogRef.close();
+      this.authService.createAuthUser(this.newUserForm.value)
+        .then(
+          (success) => {
+          this.userService.addUserDQ(new User(
+            success.uid,
+            formData.value.username,
+            formData.value.email,
+            formData.value.password,
+            formData.value.phone,
+            formData.value.otherPhone,
+            formData.value.gender,
+            formData.value.birthday,
+            this.uidCT,
+            this.questionService.getQuestion(),
+            null)
+              ,this.uidCT);
+            this.dialogRef.close();
       }).catch((error: Error) => {
         this.dialog.open(DialogErrorComponent)
           .componentInstance.error = error;

@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { Observable } from "rxjs/Observable";
-
-import { User } from './user.model';
-import { ContactRecord } from './contact-record.model';
-import { QuestionService } from "../shared/question.service";
-import { Question } from "../shared/question.model";
-
+import { AngularFireAuth, AuthMethods, AuthProviders, FirebaseAuthState} from 'angularfire2';
 
 @Injectable()
-export class UserService {
+export class AuthService {
   constructor(
-    public af: AngularFire,
-    private questionService: QuestionService) {
+    public auth: AngularFireAuth
+  ) {}
+
+
+  signinWithEmail(user: {email: string, password: string}): firebase.Promise<string> {
+    return this.auth.login(user)
+      .then((authState: FirebaseAuthState) => {
+        return authState.uid;
+      }).catch(this.handleError);
   }
 
+  createAuthUser(user: {email: string, password: string}): firebase.Promise<FirebaseAuthState> {
+    return this.auth.createUser(user)
+      .then((authState: FirebaseAuthState) => {
+        return authState;
+      }).catch(this.handleError);
+  }
 
-  // {email: string, password: string}
+  private handleError(err: any): Promise<any> {
+    console.log('Error:', err); // somente para exemplo
+    return Promise.reject(err.message || err);
+  }
 }

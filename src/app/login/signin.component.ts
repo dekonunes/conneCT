@@ -1,8 +1,11 @@
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MdDialog } from '@angular/material';
 
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AuthService } from "../shared/auth.service";
+import { DialogErrorComponent } from '../shared/dialog-error.component';
 
 @Component({
     selector: 'rb-signin',
@@ -15,7 +18,8 @@ export class SigninComponent {
     signinForm: FormGroup;
 
     constructor(
-      private af: AngularFire,
+      private authService: AuthService,
+      private dialog: MdDialog,
       public formBuilder: FormBuilder,
       private router: Router) {
 
@@ -28,22 +32,14 @@ export class SigninComponent {
       }
 
     login(signinForm: any) {
-      if(signinForm.valid) {
-        this.af.auth.login({
-          email: signinForm.value.email,
-          password: signinForm.value.password
-        },
-        {
-          provider: AuthProviders.Password,
-          method: AuthMethods.Password,
-        }).then(
-          (success) => {
-          this.router.navigate(['/users',success.uid]);
-        }).catch(
-          (err: any) => {
-          console.log(err);
-          this.error = err;
-        })
-      }
+      this.authService.signinWithEmail(this.signinForm.value)
+      .then(
+        (success) => {
+          this.router.navigate(['/users',success]);
+      }).catch((error: Error) => {
+        this.dialog.open(DialogErrorComponent)
+          .componentInstance.error = error;
+      })
+
   }
 }

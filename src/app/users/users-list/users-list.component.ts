@@ -24,9 +24,6 @@ export class UsersListComponent implements OnInit{
   users: User[] = [];
   filteredUsers: User[] = [];
   isSpinner: boolean = true;
-  color: string = 'accent';
-  mode = 'indeterminate';
-  value = 50;
   private termOfSearch: Subject<string> = new Subject<string>();
 
   constructor(
@@ -57,8 +54,8 @@ export class UsersListComponent implements OnInit{
       .distinctUntilChanged()
       .switchMap(term => term ? this.userService
         .getUsers(this.uidCT) : Observable.of<User[]>())
-      .catch(err => {
-      console.log(err);
+      .catch(error => {
+      console.log(error);
       return Observable.of<User[]>();
     });
     this.userService.getUsers(this.uidCT).subscribe(_users => {
