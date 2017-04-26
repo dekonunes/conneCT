@@ -7,9 +7,14 @@
         <md-input-container class="full-width">
           <input mdInput placeholder="Digite o nome da CT"
             required
-            name="username"
-            formControlName="username">
+            name="name"
+            formControlName="name">
         </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.name">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.name}}
+        </div>
 
         <label for="adress"><md-icon>map</md-icon> Cidade da instituição</label>
         <md-input-container class="full-width">
@@ -18,6 +23,11 @@
             name="adress"
             formControlName="adress">
         </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.adress">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.adress}}
+        </div>
 
         <label for="telephone"><md-icon>phone</md-icon> Telefone</label>
         <md-input-container class="full-width">
@@ -26,39 +36,63 @@
             name="telephone"
             formControlName="telephone">
         </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.telephone">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.telephone}}
+        </div>
 
-         <label for="email"><md-icon>email</md-icon> E-mail (Login de acesso)</label>
-         <md-input-container class="full-width">
-           <input mdInput placeholder="Digite o e-mail"
-             required
-             name="email"
-             formControlName="email">
-         </md-input-container>
-          <!-- <span *ngIf="!email.pristine && email.errors != null ">E-mail invalido</span> -->
+        <label for="email"><md-icon>email</md-icon> E-mail (Login de acesso)</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite o e-mail"
+            required
+            name="email"
+            formControlName="email">
+        </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.email">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+            {{formErrors.email}}
+        </div>
 
-          <label for="password"><md-icon>vpn_key</md-icon> Senha</label>
-          <md-input-container class="full-width">
-            <input mdInput placeholder="Digite a senha"
-              required
-              name="password"
-              type="password"
-              formControlName="password">
-          </md-input-container>
+        <label for="password"><md-icon>vpn_key</md-icon> Senha</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite a senha"
+            required
+            name="password"
+            type="password"
+            formControlName="password">
+        </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.password">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.password}}
+        </div>
 
-          <label for="confirm-password"><md-icon>vpn_key</md-icon> Confirmação de senha</label>
-          <md-input-container class="full-width">
-            <input mdInput placeholder="Digite novamente a senha"
-              required
-              name="confirmPassword"
-              type="password"
-              formControlName="confirmPassword">
-          </md-input-container>
-          <md-checkbox formControlName="checkBoxDisclosure" required [(ngModel)]="checkedCheckBox">
-            Eu li e aceito os <a>termos de uso</a>.
-          </md-checkbox>
-          <br>
-          <br>
-          <button type="submit" class="colorButton" [disabled]="!signupForm.valid || !checkedCheckBox" md-raised-button>Cadastrar</button>
+        <label for="confirm-password"><md-icon>vpn_key</md-icon> Confirmação de senha</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite novamente a senha"
+            required
+            name="confirmPassword"
+            type="password"
+            formControlName="confirmPassword">
+        </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.confirmPassword">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.confirmPassword}}
+        </div>
+        <md-checkbox formControlName="checkBoxDisclosure" required [(ngModel)]="checkedCheckBox">
+          Eu li e aceito os <a>termos de uso</a>.
+        </md-checkbox>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.checkedCheckBox">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.checkedCheckBox}}
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="colorButton" [disabled]="!signupForm.valid || !checkedCheckBox" md-raised-button>Cadastrar</button>
   </form>
   <div style="padding: 35px;"></div>
 </div>

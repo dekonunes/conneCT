@@ -12,11 +12,11 @@
               name="email"
               formControlName="email">
           </md-input-container>
-        <!-- <div class="alert alert-danger" role="alert" [hidden]="email.valid || email.pristine">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Erro:</span>
-          Entre com um e-mail valido
-        </div> -->
+          <div class="alert alert-danger" role="alert" *ngIf="formErrors.email">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+             {{formErrors.email}}
+          </div>
       </div>
       <div>
           <label for="password"><md-icon>vpn_key</md-icon> Senha</label>
@@ -28,13 +28,15 @@
               name="password"
               formControlName="password">
           </md-input-container>
-             <!-- <div class="alert alert-danger" role="alert" [hidden]="password.valid || password.pristine">
+             <div class="alert alert-danger" role="alert" *ngIf="formErrors.password">
                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                <span class="sr-only">Error:</span>
-               Digite uma senha válida com no minimo 6 digitos
-             </div> -->
+                {{formErrors.password}}
+             </div>
       </div>
       <br>
       <button type="submit" class="colorButton" [disabled]="signinForm.invalid" md-raised-button>Entrar</button>
   </form>
+  <br>
+  <button md-button>Esqueceu a senha?</button>
 </div>

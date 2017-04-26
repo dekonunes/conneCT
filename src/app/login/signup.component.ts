@@ -24,26 +24,32 @@ export class SignupComponent implements OnInit {
       private snackBar: MdSnackBar,
       private router: Router,
       private userService: UserService,
-      private formBuilder: FormBuilder) {
-        let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+      private formBuilder: FormBuilder) {}
 
-        this.signupForm = this.formBuilder.group({
-          username: ['', [Validators.required, Validators.minLength(3)]],
-          adress: ['', [Validators.required, Validators.minLength(3)]],
-          telephone: ['', [Validators.required, Validators.minLength(6)]],
-          email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
-          password: ['', [Validators.required, Validators.minLength(6)]],
-          confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-          checkBoxDisclosure: ['', Validators.required]
-        });
-      }
+    buildForm() {
+      let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+
+      this.signupForm = this.formBuilder.group({
+        name: ['', [Validators.required, Validators.minLength(4)]],
+        adress: ['', [Validators.required, Validators.minLength(4)]],
+        telephone: ['', [Validators.required, Validators.minLength(10)]],
+        email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        checkBoxDisclosure: ['', Validators.required]
+      });
+      this.signupForm.valueChanges
+        .subscribe(data => this.onValueChanged(data));
+
+      this.onValueChanged();
+    }
 
     onSignup(signupForm: FormGroup) {
       this.authService.createAuthUser(signupForm.value)
         .then((authState: FirebaseAuthState) => {
           this.userService.addUserCT(new UserCT(
             authState.uid,
-            signupForm.value.username,
+            signupForm.value.name,
             signupForm.value.email,
             signupForm.value.password,
             signupForm.value.telephone,
@@ -51,28 +57,80 @@ export class SignupComponent implements OnInit {
           ), authState.uid)
           this.router.navigate(['/signin']);
           this.snackBar.openFromComponent( SnackBarComponent, {
-            duration: 3000,
+            duration: 5000,
           });
         }).catch((error: Error) => {
           this.dialog.open(DialogErrorComponent)
             .componentInstance.error = error;
         })
+
     }
 
-    ngOnInit(): any {
-        // this.myForm = this.fb.group({
-        //     email: ['', Validators.compose([
-        //         Validators.required,
-        //         this.isEmail
-        //     ])],
+    ngOnInit() {
+      this.buildForm();
         //     password: ['', Validators.required],
         //     confirmPassword: ['', Validators.compose([
         //         Validators.required,
         //         this.isEqualPassword.bind(this)
-        //     ])],
-        // });
 
     }
+
+    onValueChanged(data?: any) {
+      if (!this.signupForm) { return; }
+      const form = this.signupForm;
+
+      for (const field in this.formErrors) {
+        this.formErrors[field] = '';
+        const control = form.get(field);
+
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+
+    formErrors = {
+      'name': '',
+      'adress': '',
+      'telephone': '',
+      'email': '',
+      'password': '',
+      'confirmPassword': '',
+      'checkedCheckBox': ''
+    };
+
+    validationMessages = {
+      'name': {
+        'required': 'Nome é obrigatório.',
+        'minlength': 'Nome deve ter no mínimo 4 letras.'
+      },
+      'adress': {
+        'required': 'Nome da cidade é obrigatório.',
+        'minlength': 'Nome da cidade deve ter no mínimo 4 letras.'
+      },
+      'telephone': {
+        'required': 'Telefone é obrigatório.',
+        'minlength': 'Telefone deve ter no mínimo 11 números (Não esqueça do DDD).'
+      },
+      'email': {
+        'required': 'E-mail é obrigatório.',
+        'pattern': 'Deve ser um e-mail válido.'
+      },
+      'password': {
+        'required': 'Senha é obrigatória.',
+        'minlength': 'Senha deve ter no mínimo 6 letras ou números.'
+      },
+      'confirmPassword': {
+        'required': 'Confirmação de senha é obrigatório. ARRRUMARRR',
+        'minlength': 'Senha deve ter no mínimo 6 letras ou números.'
+      },
+      'checkedCheckBox': {
+        'required': 'Você deve aceitar os temos de uso.'
+      }
+    };
 
     // isEqualPassword(control: FormControl): {[s: string]: boolean} {
     //     if (!this.myForm) {
