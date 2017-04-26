@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-10 col-xs-offset-2">
-        <form [formGroup]='newUserForm' (ngSubmit)="onSubmit(newUserForm); $event.preventDefault()" novalidade >
+        <form [formGroup]='editUserForm' (ngSubmit)="onSubmit(editUserForm); $event.preventDefault()" novalidade >
             <div class="row">
                 <div class="col-sm-5">
                   <label><md-icon>person</md-icon> Nome Completo</label>
@@ -12,13 +12,14 @@
                   </md-input-container>
                 </div>
 
-                 <div class="col-sm-5">
+                <div class="col-sm-5">
                   <label><md-icon>email</md-icon> E-mail (Login de acesso)</label>
                   <br>
                   <md-input-container class="form-width">
-                    <input mdInput placeholder="Insira o e-mail"
+                    <input mdInput placeholder="Insira a senha"
                       name="email"
-                      formControlName="email">
+                      formControlName="email"
+                      type="email">
                   </md-input-container>
                 </div>
 
@@ -89,8 +90,12 @@
                   </md-input-container>
                 </div>
             </div>
-            <div class="col-xs-12">
-                <button type="submit" class="colorButton" [disabled]="!newUserForm.valid" md-raised-button>Criar conta</button>
+            <div class="col-xs-6">
+                <button type="submit" class="colorButton"
+                  [disabled]="!editUserForm.valid" md-raised-button>Editar</button>
+            </div>
+            <div class="col-xs-2" align="left">
+                <button color="warn" (click)="removeDQ()" md-raised-button>Excluir</button>
             </div>
         </form>
     </div>

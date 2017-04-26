@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Params} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { Answer } from "../../shared/answer.model"
 import { AuthService } from "../../shared/auth.service";
 import { MdDialogRef, MdIconRegistry, MdDialog } from "@angular/material";
 import { User } from "../../shared/user.model"
@@ -27,7 +25,6 @@ export class UserAddComponent {
     ];
 
     constructor(
-      private activatedRouter: ActivatedRoute,
       private authService: AuthService,
       private iconRegistry: MdIconRegistry,
       private sanitizer: DomSanitizer,
@@ -40,12 +37,12 @@ export class UserAddComponent {
       let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
       this.newUserForm = this.formBuilder.group({
-        username: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-        phone: ['', [Validators.required, Validators.minLength(6)]],
-        otherPhone: ['', [Validators.required, Validators.minLength(6)]],
+        telephone: ['', [Validators.required, Validators.minLength(6)]],
+        telephoneOther: ['', [Validators.required, Validators.minLength(6)]],
         gender: ['', Validators.required],
         birthday: ['', Validators.required]
       });
@@ -63,11 +60,11 @@ export class UserAddComponent {
           (success) => {
           this.userService.addUserDQ(new User(
             success.uid,
-            formData.value.username,
+            formData.value.name,
             formData.value.email,
             formData.value.password,
-            formData.value.phone,
-            formData.value.otherPhone,
+            formData.value.telephone,
+            formData.value.telephoneOther,
             formData.value.gender,
             formData.value.birthday,
             this.uidCT,

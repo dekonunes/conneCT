@@ -10,8 +10,8 @@
 <div class="col-md-12" *ngIf="user">
   <div class="col-md-12">
       <ul class="list-group list-inline text-center">
-        <li><h1>{{user?.name}}</h1></li>
-        <li><a><md-icon>edit</md-icon></a></li>
+        <li><h1>{{user?.name}} {{user?.telephone}}</h1></li>
+        <li><a (click)="editUserDialog()" md-button><md-icon>edit</md-icon></a></li>
       </ul>
   </div>
   <div class="col-md-6">

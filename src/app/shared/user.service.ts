@@ -40,6 +40,20 @@ export class UserService {
     return this.af.database.object(`/${uidCT}`);
   }
 
+  setUserDQ(uidCT:string, uidDQ:string, user: {
+    name: string,
+    telephone: number,
+    telephoneOther: number,
+    gender: string,
+    birthday: string}) {
+      this.af.database.object(`/${uidCT}/users/${uidDQ}`).update(user);
+
+  }
+
+  removeUserDQ(uidCT:string, uidDQ:string) {
+      this.af.database.object(`/${uidCT}/users/${uidDQ}`).remove();
+  }
+
   getSpecificUser(uidCT:string, key:string): Observable<User> {
     let uidDQ:string;
     this.af.database.list(`/${uidCT}`)
