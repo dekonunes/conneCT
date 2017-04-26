@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from '@angular/material';
 
 import { GraphicAnswersComponent } from "./graphic-answers.component"
 
-
 @NgModule({
     declarations: [
-        GraphicAnswersComponent
+      GraphicAnswersComponent
     ],
     imports: [
-        BrowserModule
+      MaterialModule
     ],
     exports: [
-        GraphicAnswersComponent
+      GraphicAnswersComponent
     ],
 })
 export class GraphicAnswersModule {}

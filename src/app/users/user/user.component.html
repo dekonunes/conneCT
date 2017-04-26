@@ -1,15 +1,33 @@
 <rb-header></rb-header>
-<div class="col-md-12">
-    <ul class="list-group list-inline text-center">
+<div class="full-width" align="center">
+  <md-progress-spinner
+    *ngIf="!user"
+    class="centerSpinner"
+    color="accent"
+    mode="indeterminate">
+  </md-progress-spinner>
+</div>
+<div class="col-md-12" *ngIf="user">
+  <div class="col-md-12">
+      <ul class="list-group list-inline text-center">
         <li><h1>{{user?.name}}</h1></li>
         <li><a><md-icon>edit</md-icon></a></li>
-    </ul>
-</div>
-<div class="col-md-8">
-  <div *ngIf="user">
-    <rb-question-list [_questions]="user.questions" [_answers]="user.answers"></rb-question-list>
+      </ul>
   </div>
-</div>
-<div class="col-md-4" >
+  <div class="col-md-6">
+    <div *ngIf="user">
+      <rb-question-list [_questions]="user.questions" [_answers]="user.answers"></rb-question-list>
+    </div>
+  </div>
+  <div *ngIf="user" >
+    <div class="col-md-1" >
+      <rb-graphic-periodicity *ngFor="let i of user.questions"></rb-graphic-periodicity>
+    </div>
+    <div class="col-md-1">
+      <rb-graphic-answers *ngFor="let i of user.questions"></rb-graphic-answers>
+    </div>
+  </div>
+  <div class="col-md-4" >
     <rb-contact-record></rb-contact-record>
+  </div>
 </div>

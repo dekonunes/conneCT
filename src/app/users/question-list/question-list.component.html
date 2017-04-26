@@ -2,11 +2,9 @@
 <a>
     <md-card class="colorCard" >
      <h2>
-       {{question.title}}
-       <img *ngIf="answers[i]" src="assets/images/iconsQuestions/icon{{answers[i].answersNumber}}.jpg" class="answersIcon">
+      {{question.title}}
+      <img *ngIf="answers[i]" src="assets/images/iconsQuestions/icon{{answers[i].answersNumber}}.jpg" class="answersIcon">
      </h2>
-        <!-- <rb-graphic-answers></rb-graphic-answers>
-        <rb-graphic-periodicity></rb-graphic-periodicity> -->
   </md-card>
 </a>
 <md-card class="colorCard" *ngIf="collapse && (numberQuestion == i)">

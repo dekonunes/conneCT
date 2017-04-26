@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 
-import { GraphicAnswersModule } from "./graphic-answers/graphic-answers.module"
-import { GraphicPeriodicityModule } from "./graphic-periodicity/graphic-periodicity.module"
+
 import { QuestionListComponent } from "./question-list.component";
 
 
@@ -13,8 +12,6 @@ import { QuestionListComponent } from "./question-list.component";
     ],
     imports: [
         BrowserModule,
-        GraphicAnswersModule,
-        GraphicPeriodicityModule,
         MaterialModule
     ],
     exports: [

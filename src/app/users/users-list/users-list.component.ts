@@ -35,6 +35,8 @@ export class UsersListComponent implements OnInit{
   ngOnInit() {
     this.activatedRouter.params
       .forEach((_params: Params) => this.uidCT = _params['idCT']);
+    this.userService.getUserCT(this.uidCT)
+      .subscribe((CT) => ga('set', 'userId', `${CT["data"]["username"]}_this.uidCT`));
     this.updatePageOfUsers();
   }
 
@@ -73,7 +75,7 @@ export class UsersListComponent implements OnInit{
   }
 
   routerComponent (userUID: string) {
-    this.router.navigate(['/users/user',this.uidCT,userUID]);
+    this.router.navigate([`/users/${this.uidCT}/user/${userUID}`]);
   }
 
 }

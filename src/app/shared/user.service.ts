@@ -36,6 +36,10 @@ export class UserService {
     return this.af.database.object(`/${uidCT}/users/${uidDQ}`);
   }
 
+  getUserCT(uidCT:string): FirebaseObjectObservable<User> {
+    return this.af.database.object(`/${uidCT}`);
+  }
+
   getSpecificUser(uidCT:string, key:string): Observable<User> {
     let uidDQ:string;
     this.af.database.list(`/${uidCT}`)
