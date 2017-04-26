@@ -31,6 +31,10 @@ export class EditUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.buildForm();
+  }
+
+  buildForm() {
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     this.iconRegistry.addSvgIcon(
       'gender',
@@ -40,14 +44,16 @@ export class EditUserComponent implements OnInit {
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/images/cake.svg'));
     this.editUserForm = this.formBuilder.group({
       name: [this._user.name, [Validators.required, Validators.minLength(3)]],
-      email: [{value: this._user.email, disabled: true}, Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
-      password: [{value: this._user.password, disabled: true}, [Validators.required, Validators.minLength(6)]],
-      confirmPassword: [{value: this._user.password, disabled: true}, [Validators.required, Validators.minLength(6)]],
-      telephone: [this._user.telephone, [Validators.required, Validators.minLength(6)]],
-      telephoneOther: [this._user.telephoneOther, [Validators.required, Validators.minLength(6)]],
+      email: [{value: this._user.email, disabled: true}],
+      password: [{value: this._user.password, disabled: true}],
+      confirmPassword: [{value: this._user.password, disabled: true}],
+      telephone: [this._user.telephone, [Validators.required, Validators.minLength(10)]],
+      telephoneOther: [this._user.telephoneOther, [Validators.required, Validators.minLength(10)]],
       gender: [this._user.gender, Validators.required],
       birthday: [this._user.birthday, Validators.required]
     });
+    this.editUserForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
   }
 
   onSubmit(formData: any) {
@@ -61,5 +67,43 @@ export class EditUserComponent implements OnInit {
     this.dialogRef.close();
     this.router.navigate([`/users/${this._uidCT}`]);
   }
+
+  onValueChanged(data?: any) {
+    if (!this.editUserForm) { return; }
+    const form = this.editUserForm;
+
+    for (const field in this.formErrors) {
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'name': '',
+    'telephone': '',
+    'telephoneOther': ''
+  };
+
+  validationMessages = {
+    'name': {
+      'required': 'Nome é obrigatório.',
+      'minlength': 'Nome deve ter no mínimo 4 letras.'
+    },
+    'telephone': {
+      'required': 'Telefone é obrigatório.',
+      'minlength': 'Telefone deve ter no mínimo 11 números (Não esqueça do DDD).'
+    },
+    'telephoneOther': {
+      'required': 'Telefone é obrigatório.',
+      'minlength': 'Telefone deve ter no mínimo 11 números (Não esqueça do DDD).'
+    }
+  };
 
 }

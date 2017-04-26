@@ -105,11 +105,6 @@
                       Feminino
                     </md-radio-button>
                   </md-radio-group>
-                  <div class="alert alert-danger" role="alert" *ngIf="formErrors.gender">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span>
-                     {{formErrors.gender}}
-                  </div>
                 </div>
 
                 <div class="col-sm-5">
@@ -122,11 +117,6 @@
                       formControlName="birthday"
                       required>
                   </md-input-container>
-                  <div class="alert alert-danger" role="alert" *ngIf="formErrors.birthday">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span>
-                     {{formErrors.birthday}}
-                  </div>
                 </div>
             </div>
             <div class="col-xs-12">

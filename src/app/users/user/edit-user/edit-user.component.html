@@ -10,6 +10,11 @@
                       name="name"
                       formControlName="name">
                   </md-input-container>
+                  <div class="alert alert-danger" role="alert" *ngIf="formErrors.name">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                     {{formErrors.name}}
+                  </div>
                 </div>
 
                 <div class="col-sm-5">
@@ -53,6 +58,11 @@
                       name="text"
                       formControlName="telephone">
                   </md-input-container>
+                  <div class="alert alert-danger" role="alert" *ngIf="formErrors.telephone">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                     {{formErrors.telephone}}
+                  </div>
                 </div>
 
                 <div class="col-sm-5">
@@ -63,6 +73,11 @@
                       name="text"
                       formControlName="telephoneOther">
                   </md-input-container>
+                  <div class="alert alert-danger" role="alert" *ngIf="formErrors.telephoneOther">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                     {{formErrors.telephoneOther}}
+                  </div>
                 </div>
 
                 <div class="col-sm-5">
