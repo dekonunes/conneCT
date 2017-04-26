@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
@@ -15,7 +15,7 @@ import { DialogErrorComponent } from "../../shared/dialog-error.component";
     templateUrl: './user-add.component.html',
     styleUrls: ['./user-add.component.css']
 })
-export class UserAddComponent {
+export class UserAddComponent implements OnInit {
     uidCT:string;
     newUserForm: FormGroup;
 
@@ -32,12 +32,17 @@ export class UserAddComponent {
       public dialogRef: MdDialogRef<UserAddComponent>,
       public formBuilder: FormBuilder,
       private userService: UserService,
-      private questionService: QuestionService) {
+      private questionService: QuestionService) {}
 
+    ngOnInit() {
+      this.buildForm();
+    }
+
+    buildForm() {
       let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
       this.newUserForm = this.formBuilder.group({
-        name: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(4)]],
         email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -46,12 +51,16 @@ export class UserAddComponent {
         gender: ['', Validators.required],
         birthday: ['', Validators.required]
       });
-      iconRegistry.addSvgIcon(
+      this.newUserForm.valueChanges
+        .subscribe(data => this.onValueChanged(data));
+
+      this.onValueChanged();
+      this.iconRegistry.addSvgIcon(
         'gender',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/images/gender.svg'));
-      iconRegistry.addSvgIcon(
+        this.sanitizer.bypassSecurityTrustResourceUrl('assets/images/gender.svg'));
+      this.iconRegistry.addSvgIcon(
         'cake',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/images/cake.svg'));
+        this.sanitizer.bypassSecurityTrustResourceUrl('assets/images/cake.svg'));
     }
 
     onSubmit(formData: any) {
@@ -77,4 +86,66 @@ export class UserAddComponent {
           .componentInstance.error = error;
       })
     }
+
+    onValueChanged(data?: any) {
+      if (!this.newUserForm) { return; }
+      const form = this.newUserForm;
+
+      for (const field in this.formErrors) {
+        this.formErrors[field] = '';
+        const control = form.get(field);
+
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+
+    formErrors = {
+      'name': '',
+      'email': '',
+      'password': '',
+      'confirmPassword': '',
+      'telephone': '',
+      'telephoneOther': '',
+      'gender': '',
+      'birthday': ''
+    };
+
+    validationMessages = {
+      'name': {
+        'required': 'Nome é obrigatório.',
+        'minlength': 'Nome deve ter no mínimo 4 letras.'
+      },
+      'email': {
+        'required': 'E-mail é obrigatório.',
+        'pattern': 'Deve ser um e-mail válido.'
+      },
+      'password': {
+        'required': 'Senha é obrigatória.',
+        'minlength': 'Senha deve ter no mínimo 6 letras ou números.'
+      },
+      'confirmPassword': {
+        'required': 'Confirmação de senha é obrigatório. ARRRUMARRR',
+        'minlength': 'Senha deve ter no mínimo 6 letras ou números.'
+      },
+
+      'telephone': {
+        'required': 'Telefone é obrigatório.',
+        'minlength': 'Telefone deve ter no mínimo 11 números (Não esqueça do DDD).'
+      },
+      'telephoneOther': {
+        'required': 'Telefone é obrigatório.',
+        'minlength': 'Telefone deve ter no mínimo 11 números (Não esqueça do DDD).'
+      },
+      'gender': {
+        'required': 'Nome da cidade é obrigatório.'
+      },
+      'birthday': {
+        'required': 'Data de nascimento obrigatório.'
+      }
+    };
 }
