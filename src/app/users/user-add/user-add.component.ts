@@ -44,8 +44,8 @@ export class UserAddComponent implements OnInit {
         email: ['', Validators.compose([Validators.required, Validators.email])],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6),this.isEqualPassword.bind(this)]],
-        telephone: ['', [Validators.required, Validators.minLength(6)]],
-        telephoneOther: ['', [Validators.required, Validators.minLength(6)]],
+        telephone: ['', [Validators.required, Validators.minLength(10)]],
+        telephoneOther: ['', [Validators.required, Validators.minLength(10)]],
         gender: ['', Validators.required],
         birthday: ['', Validators.required]
       });
