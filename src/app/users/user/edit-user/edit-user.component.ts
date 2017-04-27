@@ -35,7 +35,6 @@ export class EditUserComponent implements OnInit {
   }
 
   buildForm() {
-    let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     this.iconRegistry.addSvgIcon(
       'gender',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/images/gender.svg'));

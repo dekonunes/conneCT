@@ -49,6 +49,7 @@ export class ContactRecordComponent implements OnInit {
          new Date().toString(),
          formData.value.messageContact));
     this.getMessagensRecord();
+    this.contactForm.reset();
   }
 
   reverseArray() {

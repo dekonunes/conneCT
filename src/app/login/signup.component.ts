@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { MdSnackBar, MdDialog } from '@angular/material';
 
 import { FirebaseAuthState } from 'angularfire2';
@@ -27,15 +27,13 @@ export class SignupComponent implements OnInit {
       private formBuilder: FormBuilder) {}
 
     buildForm() {
-      let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-
       this.signupForm = this.formBuilder.group({
         name: ['', [Validators.required, Validators.minLength(4)]],
         adress: ['', [Validators.required, Validators.minLength(4)]],
         telephone: ['', [Validators.required, Validators.minLength(10)]],
-        email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+        email: ['', Validators.compose([Validators.required, Validators.email])],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6),this.isEqualPassword.bind(this)]],
         checkBoxDisclosure: ['', Validators.required]
       });
       this.signupForm.valueChanges
@@ -63,7 +61,16 @@ export class SignupComponent implements OnInit {
           this.dialog.open(DialogErrorComponent)
             .componentInstance.error = error;
         })
+    }
 
+    isEqualPassword(control: FormControl): {[s: string]: boolean} {
+        if (!this.signupForm) {
+            return {passwordsNotMatch: true};
+
+        }
+        if (control.value !== this.signupForm.controls['password'].value) {
+            return {passwordsNotMatch: true};
+        }
     }
 
     ngOnInit() {
@@ -117,28 +124,19 @@ export class SignupComponent implements OnInit {
       },
       'email': {
         'required': 'E-mail é obrigatório.',
-        'pattern': 'Deve ser um e-mail válido.'
+        'email': 'Deve ser um e-mail válido.'
       },
       'password': {
         'required': 'Senha é obrigatória.',
         'minlength': 'Senha deve ter no mínimo 6 letras ou números.'
       },
       'confirmPassword': {
-        'required': 'Confirmação de senha é obrigatório. ARRRUMARRR',
-        'minlength': 'Senha deve ter no mínimo 6 letras ou números.'
+        'required': 'Confirmação de senha é obrigatório.',
+        'minlength': 'Senha deve ter no mínimo 6 letras ou números.',
+        'passwordsNotMatch': 'Senha não confere com a senha digitada'
       },
       'checkedCheckBox': {
         'required': 'Você deve aceitar os temos de uso.'
       }
     };
-
-    // isEqualPassword(control: FormControl): {[s: string]: boolean} {
-    //     if (!this.myForm) {
-    //         return {passwordsNotMatch: true};
-    //
-    //     }
-    //     if (control.value !== this.myForm.controls['password'].value) {
-    //         return {passwordsNotMatch: true};
-    //     }
-    // }
 }

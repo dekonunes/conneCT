@@ -40,10 +40,8 @@ export class SigninComponent implements OnInit {
     }
 
   buildForm() {
-    let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-
     this.signinForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
@@ -79,7 +77,7 @@ export class SigninComponent implements OnInit {
   validationMessages = {
     'email': {
       'required': 'E-mail é obrigatório.',
-      'pattern': 'Deve ser um e-mail válido.'
+      'email': 'Deve ser um e-mail válido.'
     },
     'password': {
       'required': 'Senha é obrigatória.',
