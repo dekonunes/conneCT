@@ -13,10 +13,11 @@ export class GraphicPeriodicityComponent implements OnInit {
   @Input() _answers: Answer[][];
   @Input() _numberOfQuestions: number;
   arrayNumberOfQuestions = Array;
-  numbers: number[];
   answers: Answer[] = [];
 
-  constructor(private dialog: MdDialog) {}
+  constructor(
+    private dialog: MdDialog
+  ) {}
 
   ngOnInit() {
     let lastProperty: any;
@@ -26,8 +27,10 @@ export class GraphicPeriodicityComponent implements OnInit {
     }
   }
 
-  graphicDialog () {
-    this.dialog.open(GraphicDialogComponent);
+  graphicDialog (idQuestion: number) {
+    let dialogRef = this.dialog.open(GraphicDialogComponent, [this._answers,idQuestion])
+    dialogRef.componentInstance._answers = this._answers;
+    dialogRef.componentInstance._idQuestion = idQuestion;
   }
 
 }

@@ -1,5 +1,5 @@
-<div class="paddingCard" *ngFor="let i of arrayNumberOfQuestions(_numberOfQuestions)">
-  <a class="graphics-icon " (click)="graphicDialog()">
+<div class="paddingCard" *ngFor="let in of arrayNumberOfQuestions(_numberOfQuestions); let i = index">
+  <a class="graphics-icon " (click)="graphicDialog(i)">
     <md-card class="colorCard customPadding">
       <img
         mdTooltip="Atual"
