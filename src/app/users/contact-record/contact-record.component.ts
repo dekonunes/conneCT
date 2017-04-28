@@ -36,10 +36,6 @@ export class ContactRecordComponent implements OnInit {
     this.getMessagensRecord();
   }
 
-  onScroll(event: any) {
-    console.log('scroll event', event);
-  }
-
   onSubmit(formData: any) {
     this.userService.addMessageContactRecord(
       this.uidCT,

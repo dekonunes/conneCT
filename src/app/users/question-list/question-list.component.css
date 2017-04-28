@@ -1,14 +1,3 @@
-a {
-    cursor: pointer;
-}
-
 .spacePAD {
     margin-right: 5%;
-}
-
-.answersIcon{
-  height: 60%;
-  width: 8%;
-  position:absolute;top: 18%;
-  right: 2%;
 }

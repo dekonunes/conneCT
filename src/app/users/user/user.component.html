@@ -14,20 +14,17 @@
         <li><button (click)="editUserDialog()" md-button><md-icon>edit</md-icon></button></li>
       </ul>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-5">
     <div *ngIf="user">
-      <rb-question-list [_questions]="user.questions" [_answers]="user.answers"></rb-question-list>
+      <rb-question-list [_questions]="user.questions" ></rb-question-list>
     </div>
   </div>
   <div *ngIf="user" >
-    <div class="col-md-1" >
-      <rb-graphic-periodicity *ngFor="let i of user.questions"></rb-graphic-periodicity>
-    </div>
-    <div class="col-md-1">
-      <rb-graphic-answers *ngFor="let i of user.questions"></rb-graphic-answers>
+    <div class="col-md-2" >
+      <rb-graphic-periodicity [_numberOfQuestions]="user.questions.length" [_answers]="user.answers"></rb-graphic-periodicity>
     </div>
   </div>
-  <div class="col-md-4" >
+  <div class="col-md-5" >
     <rb-contact-record></rb-contact-record>
   </div>
 </div>

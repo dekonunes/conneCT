@@ -3,14 +3,13 @@
     <md-card class="colorCard" >
      <h2>
       {{question.title}}
-      <img *ngIf="answers[i]" src="assets/images/iconsQuestions/icon{{answers[i].answersNumber}}.jpg" class="answersIcon">
      </h2>
   </md-card>
 </a>
 <md-card class="colorCard" *ngIf="collapse && (numberQuestion == i)">
- <h2>
+ <p>
    {{question.description}}
- </h2>
+ </p>
 </md-card>
 </div>
 <div style="padding: 35px;color: white">.</div>

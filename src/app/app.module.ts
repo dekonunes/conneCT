@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { MaterialModule } from '@angular/material';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 import 'hammerjs';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -59,6 +60,7 @@ const myFirebaseAuthConfig = {
         UserAddModule,
         UserModule,
         UsersListModule,
+        ChartsModule,
         MaterialModule
     ],
     providers: [

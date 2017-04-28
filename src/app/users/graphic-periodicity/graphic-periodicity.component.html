@@ -1,6 +1,14 @@
-<div class="paddingCard">
-  <a md-button class="graphics-icon">
-    <md-icon>timeline</md-icon>
-    <p>Frequência</p>
+<div class="paddingCard" *ngFor="let i of arrayNumberOfQuestions(_numberOfQuestions)">
+  <a class="graphics-icon " (click)="graphicDialog()">
+    <md-card class="colorCard customPadding">
+      <img
+        mdTooltip="Atual"
+        mdTooltipPosition="after"
+        *ngIf="answers[i]"
+        src="assets/images/iconsQuestions/icon{{answers[i].answersNumber}}.jpg"
+        class="answersIcon">
+      <md-icon>timeline</md-icon>
+      <p>Histórico</p>
+    </md-card>
   </a>
 </div>

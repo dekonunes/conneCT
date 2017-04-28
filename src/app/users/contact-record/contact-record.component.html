@@ -37,11 +37,10 @@
 <md-card-title >
   <b>Histórico do contato</b>
 </md-card-title>
-  <div (window:scroll)="onScroll($event)">
+  <div class="scroll-container">
   <div
     class="paddingCard"
-    *ngFor="let messageContact of messagesContactRecord"
-    >
+    *ngFor="let messageContact of messagesContactRecord">
     <md-card>
         <h4 ><md-icon>person</md-icon>{{messageContact.nameContact}}</h4>
         <h4 ><md-icon>date_range</md-icon>{{messageContact.date | date:'medium'}}</h4>
