@@ -14,6 +14,11 @@
   background-color: #ffd740 !important;
 }
 
+.centerSpinner {
+  width: 50%;
+  margin: 0 auto;
+}
+
 .graphics-icon {
   width: 100px;
   height: 81px;

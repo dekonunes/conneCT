@@ -75,11 +75,6 @@ export class SignupComponent implements OnInit {
 
     ngOnInit() {
       this.buildForm();
-        //     password: ['', Validators.required],
-        //     confirmPassword: ['', Validators.compose([
-        //         Validators.required,
-        //         this.isEqualPassword.bind(this)
-
     }
 
     onValueChanged(data?: any) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   users$: Observable<User[]>;
   users: User[] = [];
   filteredUsers: User[] = [];
+  @Input() backButton: boolean;
   private termOfSearch: Subject<string> = new Subject<string>();
 
   constructor(private router: Router,
@@ -58,13 +59,16 @@ export class HeaderComponent implements OnInit {
   // }
 
   routerComponent(userUID: string) {
-    this.router.navigateByUrl(`/users/user/${this.uidCT}/${userUID}`);
-    if(this.uidDQ != null)
-      location.reload();
+    this.router.navigateByUrl(`/users/${this.uidCT}/user/${userUID}`);
   }
 
   navigate() {
     this.router.navigate(['/users',this.uidCT]);
+  }
+
+  settings() {
+    this.router.navigateByUrl(`/users/${this.uidCT}/settings`);
+
   }
 
   logout() {

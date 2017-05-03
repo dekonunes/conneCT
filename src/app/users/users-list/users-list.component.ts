@@ -36,7 +36,7 @@ export class UsersListComponent implements OnInit{
     this.activatedRouter.params
       .forEach((_params: Params) => this.uidCT = _params['idCT']);
     this.userService.getUserCT(this.uidCT)
-      .subscribe((CT) => ga('set', 'userId', `${CT["data"]["username"]}_${this.uidCT}`));
+      .subscribe(_CT => ga('set', 'userId', `${_CT["username"]}_${this.uidCT}`));
 
     this.updatePageOfUsers();
   }

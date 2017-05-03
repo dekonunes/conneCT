@@ -12,6 +12,7 @@ import { AppComponent } from "./app.component";
 import { ContactRecordModule } from "./users/contact-record/contact-record.module";
 import { DialogErrorComponent } from "./shared/dialog-error.component";
 import { UserService } from "./shared/user.service";
+import { GamificationService } from "./shared/gamification.service";
 import { FooterModule } from "./footer/footer.module"
 import { HeaderModule } from "./header/header.module";
 import { HeaderLoginModule } from "./login/header-login.module";
@@ -19,6 +20,7 @@ import { HomeModule } from "./home/home.module";
 import { AppRoutingModule } from "./app-routes.module";
 import { UserAddModule } from "./users/user-add/user-add.module";
 import { UserModule } from "./users/user/user.module";
+import { UserCTModule } from "./user-ct/user-ct.module";
 import { UsersListModule } from './users/users-list/users-list.module';
 import { QuestionListModule } from "./users/question-list/question-list.module";
 import { QuestionService } from "./shared/question.service";
@@ -59,6 +61,7 @@ const myFirebaseAuthConfig = {
         QuestionListModule,
         UserAddModule,
         UserModule,
+        UserCTModule,
         UsersListModule,
         ChartsModule,
         MaterialModule
@@ -66,7 +69,8 @@ const myFirebaseAuthConfig = {
     providers: [
         AuthService,
         QuestionService,
-        UserService
+        UserService,
+        GamificationService
     ],
     bootstrap: [AppComponent]
 })

@@ -37,7 +37,14 @@ export class UserService {
   }
 
   getUserCT(uidCT:string): FirebaseObjectObservable<User> {
-    return this.af.database.object(`/${uidCT}`);
+    return this.af.database.object(`/${uidCT}/data`);
+  }
+
+  setUserCT(uidCT:string, user: {
+    username: string,
+    adress: string,
+    telephone: number}) {
+      this.af.database.object(`/${uidCT}/data`).update(user);
   }
 
   setUserDQ(uidCT:string, uidDQ:string, user: {

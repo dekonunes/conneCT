@@ -2,11 +2,6 @@ a {
   cursor: pointer;
 }
 
-.centerSpinner {
-  width: 50%;
-  margin: 0 auto;
-}
-
 .buttonAdd {
   display: inline-block;
   position: fixed;

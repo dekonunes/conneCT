@@ -8,7 +8,6 @@ import { UserComponent } from "./user.component";
 import { HeaderModule } from "../../header/header.module";
 import { QuestionListModule } from "../question-list/question-list.module";
 import { ContactRecordModule } from "../contact-record/contact-record.module";
-import { GraphicAnswersModule } from "../graphic-answers/graphic-answers.module"
 import { GraphicPeriodicityModule } from "../graphic-periodicity/graphic-periodicity.module";
 import { EditUserComponent } from './edit-user/edit-user.component'
 
@@ -17,7 +16,6 @@ import { EditUserComponent } from './edit-user/edit-user.component'
       BrowserAnimationsModule,
       BrowserModule,
       ContactRecordModule,
-      GraphicAnswersModule,
       GraphicPeriodicityModule,
       MaterialModule,
       HeaderModule,

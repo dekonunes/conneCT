@@ -58,10 +58,10 @@ export class EditUserComponent implements OnInit {
   onSubmit(formData: any) {
     this.userService.setUserDQ(this._uidCT, this._uidDQ, this.editUserForm.value);
     this.dialogRef.close();
-    location.reload();
+    this.router.navigate([`/users/${this._uidCT}`]);
   }
 
-  removeDQ() {
+  onDelete() {
     this.userService.removeUserDQ(this._uidCT, this._uidDQ);
     this.dialogRef.close();
     this.router.navigate([`/users/${this._uidCT}`]);

@@ -7,6 +7,7 @@ import { MdDialogRef, MdIconRegistry, MdDialog } from "@angular/material";
 import { User } from "../../shared/user.model"
 import { UserService } from "../../shared/user.service";
 import { QuestionService } from "../../shared/question.service";
+import { GamificationService } from "../../shared/gamification.service";
 import { DialogErrorComponent } from "../../shared/dialog-error.component";
 
 
@@ -32,6 +33,7 @@ export class UserAddComponent implements OnInit {
       public dialogRef: MdDialogRef<UserAddComponent>,
       public formBuilder: FormBuilder,
       private userService: UserService,
+      private gamificationService: GamificationService,
       private questionService: QuestionService) {}
 
     ngOnInit() {
@@ -62,13 +64,10 @@ export class UserAddComponent implements OnInit {
     }
 
     isEqualPassword(control: FormControl): {[s: string]: boolean} {
-        if (!this.newUserForm) {
-            return {passwordsNotMatch: true};
-
-        }
-        if (control.value !== this.newUserForm.controls['password'].value) {
-            return {passwordsNotMatch: true};
-        }
+        if (!this.newUserForm)
+          return {passwordsNotMatch: true};
+        if (control.value !== this.newUserForm.controls['password'].value)
+          return {passwordsNotMatch: true};
     }
 
     onSubmit(formData: any) {
@@ -86,7 +85,8 @@ export class UserAddComponent implements OnInit {
             formData.value.birthday,
             this.uidCT,
             this.questionService.getQuestion(),
-            null)
+            null,
+            this.gamificationService.getGamification())
               ,this.uidCT);
             this.dialogRef.close();
       }).catch((error: Error) => {

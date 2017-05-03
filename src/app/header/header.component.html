@@ -1,6 +1,6 @@
 <md-toolbar>
   <img src="assets/images/logoGrande.png" alt="">
-  <a (click)="navigate()" md-button *ngIf="uidDQ != null" ><md-icon>arrow_back</md-icon>Companheiros</a>
+  <a (click)="navigate()" md-button *ngIf="backButton" ><md-icon>arrow_back</md-icon>Companheiros</a>
   <span class="example-spacer"></span>
   <!-- <md-input-container>
     <input mdInput placeholder="Busca" [mdAutocomplete]="auto" (input)="search($event.target.value)">
@@ -13,8 +13,8 @@
   <button md-icon-button [mdMenuTriggerFor]="menu">
     <md-icon>more_vert</md-icon>
   </button>
-  <md-menu #menu="mdMenu">
-    <button md-menu-item>
+  <md-menu #menu="mdMenu" >
+    <button md-menu-item (click)="settings()">
       <md-icon>settings</md-icon>
       <span>Configurações</span>
     </button>

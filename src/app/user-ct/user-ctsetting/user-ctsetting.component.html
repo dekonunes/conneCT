@@ -1,0 +1,75 @@
+<rb-header [backButton] = true></rb-header>
+<div class="full-width">
+  <md-progress-spinner
+    *ngIf="isSpinner"
+    class="centerSpinner"
+    color="accent"
+    mode="indeterminate">
+  </md-progress-spinner>
+</div>
+<div class="col-md-10 col-md-offset-1" *ngIf="!isSpinner">
+  <h3>Edite os dados da CT</h3>
+  <form [formGroup]='editForm' (ngSubmit)="onEdit(editForm); $event.preventDefault()" novalidade>
+
+        <label for="username"><md-icon>store_mall_directory</md-icon> Nome da instituição</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite o nome da CT"
+            required
+            name="username"
+            formControlName="username">
+        </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.username">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.name}}
+        </div>
+
+        <label for="adress"><md-icon>map</md-icon> Cidade da instituição</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite o nome da cidade"
+            required
+            name="adress"
+            formControlName="adress">
+        </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.adress">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.adress}}
+        </div>
+
+        <label for="telephone"><md-icon>phone</md-icon> Telefone</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite um telefone"
+            required
+            name="telephone"
+            formControlName="telephone">
+        </md-input-container>
+        <div class="alert alert-danger" role="alert" *ngIf="formErrors.telephone">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+           {{formErrors.telephone}}
+        </div>
+
+        <label for="email"><md-icon>email</md-icon> E-mail (Login de acesso)</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite o e-mail"
+            required
+            name="email"
+            formControlName="email">
+        </md-input-container>
+
+        <label for="password"><md-icon>vpn_key</md-icon> Senha</label>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Digite a senha"
+            required
+            name="password"
+            type="password"
+            formControlName="password">
+        </md-input-container>
+
+        <br>
+        <br>
+        <button type="submit" class="colorButton" [disabled]="!editForm.valid" md-raised-button>Editar</button>
+  </form>
+  <div style="padding: 35px;"></div>
+</div>
