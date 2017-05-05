@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 
 import { AuthService } from "../../shared/auth.service";
-import { MdDialogRef, MdIconRegistry, MdDialog } from "@angular/material";
+import { MdDialogRef, MdDialog } from "@angular/material";
 import { User } from "../../shared/user.model"
 import { UserService } from "../../shared/user.service";
 import { QuestionService } from "../../shared/question.service";
@@ -27,7 +27,6 @@ export class UserAddComponent implements OnInit {
 
     constructor(
       private authService: AuthService,
-      private iconRegistry: MdIconRegistry,
       private sanitizer: DomSanitizer,
       private dialog: MdDialog,
       public dialogRef: MdDialogRef<UserAddComponent>,
@@ -55,12 +54,6 @@ export class UserAddComponent implements OnInit {
         .subscribe(data => this.onValueChanged(data));
 
       this.onValueChanged();
-      this.iconRegistry.addSvgIcon(
-        'gender',
-        this.sanitizer.bypassSecurityTrustResourceUrl('assets/images/gender.svg'));
-      this.iconRegistry.addSvgIcon(
-        'cake',
-        this.sanitizer.bypassSecurityTrustResourceUrl('assets/images/cake.svg'));
     }
 
     isEqualPassword(control: FormControl): {[s: string]: boolean} {
@@ -89,9 +82,27 @@ export class UserAddComponent implements OnInit {
             this.gamificationService.getGamification())
               ,this.uidCT);
             this.dialogRef.close();
-      }).catch((error: Error) => {
+      }).catch((error: any) => {
+        let errorText: string;
+        switch (error) {
+          case "The email address is badly formatted.":
+            errorText = 'O e-mail esta com o formato errado.';
+          break;
+          case "The password is invalid or the user does not have a password.":
+            errorText = 'A senha esta errada';
+          break;
+          case "There is no user record corresponding to this identifier. The user may have been deleted.":
+            errorText = 'Não há nenhuma conta com esse e-mail (verifique se o e-mail esta correto).';
+          break;
+          case "The email address is already in use by another account.":
+            errorText = 'Esse e-mail já esta sendo usado.';
+          break;
+          default:
+            errorText = 'Envie um e-mail para dekonunesss@gmail.com com o seu login e o problema encontrado.';
+          break;
+        }
         this.dialog.open(DialogErrorComponent)
-          .componentInstance.error = error;
+          .componentInstance.error = errorText;
       })
     }
 

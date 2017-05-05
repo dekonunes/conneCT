@@ -33,9 +33,27 @@ export class SigninComponent implements OnInit {
       .then(
         (success) => {
           this.router.navigate(['/users',success]);
-      }).catch((error: Error) => {
+      }).catch((error: any) => {
+        let errorText: string;
+        switch (error) {
+          case "The email address is badly formatted.":
+            errorText = 'O e-mail esta com o formato errado';
+          break;
+          case "The password is invalid or the user does not have a password.":
+            errorText = 'A senha esta errada';
+          break;
+          case "There is no user record corresponding to this identifier. The user may have been deleted.":
+            errorText = 'Não há nenhuma conta com esse e-mail (verifique se o e-mail esta correto)';
+          break;
+          case "You must include credentials to use this auth method.":
+            errorText = 'Envie um e-mail para dekonunesss@gmail.com com o seu login, que retornarei o mais breve possível';
+          break;
+          default:
+            errorText = 'Envie um e-mail para dekonunesss@gmail.com com o seu login e o problema encontrado.';
+          break;
+        }
         this.dialog.open(DialogErrorComponent)
-          .componentInstance.error = error;
+          .componentInstance.error = errorText;
       })
     }
 

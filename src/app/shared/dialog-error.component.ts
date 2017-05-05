@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog-error.component.css']
 })
 export class DialogErrorComponent implements OnInit {
-  error: Error;
+  error: string;
 
   constructor() {}
 
