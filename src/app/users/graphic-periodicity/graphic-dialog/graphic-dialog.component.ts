@@ -23,7 +23,9 @@ export class GraphicDialogComponent implements OnInit  {
 
     for (let ind in this._answers) {
       this.answers = this._answers[ind];
-      this.arrayAnswers[new Date(this.answers[this._idQuestion].date).getDate()-1] = this.answers[this._idQuestion].answersNumber;
+      console.log(this.answers)
+      if (this.answers[this._idQuestion] != undefined)
+        this.arrayAnswers[new Date(this.answers[this._idQuestion].date).getDate()-1] = this.answers[this._idQuestion].answersNumber;
     }
 
     this.lineChartData = [
@@ -38,10 +40,10 @@ export class GraphicDialogComponent implements OnInit  {
 
   public lineChartColors:Array<any> = [
     { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'black',
-      pointBorderColor: '#fff',
+      backgroundColor: 'rgba(0,0,255,0.2)',
+      borderColor: 'rgba(0,0,255,0.5)',
+      pointBackgroundColor: 'blue',
+      pointBorderColor: 'blue',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
@@ -53,8 +55,8 @@ export class GraphicDialogComponent implements OnInit  {
             ticks: {
               callback: ((val:any) => Number.isInteger(val) ? val : null),
               min: 1,
-              max: 5,
-            }
+              max: 5
+            },
           }
         ]
       }
