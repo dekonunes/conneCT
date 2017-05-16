@@ -78,9 +78,7 @@ export class UsersListComponent implements OnInit{
   }
 
   sortArray() {
-    this.filteredUsers.sort((_user1:User, _user2:User) => {
-      return (_user1.averageAnswers - _user2.averageAnswers) ;
-    })
+    this.filteredUsers.sort((_user1:User, _user2:User) => _user1.averageAnswers - _user2.averageAnswers)
   }
 
   routerComponent (userUID: string) {
