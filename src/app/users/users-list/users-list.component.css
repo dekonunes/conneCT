@@ -8,3 +8,11 @@ a {
   bottom: 55px;
   right: 50px;
 }
+
+.answersMedianIcon {
+  height: auto;
+  width: 5%;
+  position:absolute;
+  top: 18%;
+  right: 5%;
+}

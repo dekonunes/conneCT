@@ -8,7 +8,8 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { User } from "../../shared/user.model"
+import { User } from "../../shared/user.model";
+import { Answer } from "../../shared/answer.model"
 import { UserService } from "../../shared/user.service";
 import { UserAddComponent } from "../user-add/user-add.component";
 
@@ -37,7 +38,6 @@ export class UsersListComponent implements OnInit{
       .forEach((_params: Params) => this.uidCT = _params['idCT']);
     this.userService.getUserCT(this.uidCT)
       .subscribe(_CT => ga('set', 'userId', `${_CT["username"]}_${this.uidCT}`));
-
     this.updatePageOfUsers();
   }
 
@@ -69,9 +69,17 @@ export class UsersListComponent implements OnInit{
     })
   }
 
+  calculeMedianAnwers(_user: User) {
+    let median: number = 0;
+    _user.answers.forEach((answer: Answer) => {
+      median += answer.answersNumber
+    });
+    console.log(median/_user.answers.length);
+  }
+
   sortArray() {
     this.filteredUsers.sort((_user1:User, _user2:User) => {
-      return _user1.name.toUpperCase().localeCompare(_user2.name.toUpperCase());
+      return (_user1.averageAnswers - _user2.averageAnswers) ;
     })
   }
 

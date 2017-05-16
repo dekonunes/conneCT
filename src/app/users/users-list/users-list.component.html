@@ -28,9 +28,11 @@
           <a (click)="routerComponent(user.id)" style="text-decoration: none !important;">
             <div class="paddingCard">
               <md-card class="colorCard " >
-                    <h2>{{user.name}}</h2>
+                    <h2>{{user.name}}
+                      <img *ngIf="user.averageAnswers > 0" src="assets/images/iconsQuestions/icon{{user?.averageAnswers}}.jpg" alt="" class="answersMedianIcon"></h2>
               </md-card>
             </div>
+
           </a>
         </div>
         <div style="padding: 40px;color: white">.</div>

@@ -22,15 +22,16 @@ export class GraphicPeriodicityComponent implements OnInit {
   ngOnInit() {
     let lastProperty: any;
     if(this._answers) {
-      for (lastProperty in this._answers){}
-      this.answers = this._answers[lastProperty];
+      for(let _i = 0; _i < this._answers.length; _i++) {
+        for (lastProperty in this._answers[_i]){}
+        this.answers[_i] = this._answers[_i][lastProperty];
+      }
     }
   }
 
   graphicDialog (idQuestion: number) {
     let dialogRef = this.dialog.open(GraphicDialogComponent, [this._answers,idQuestion])
-    dialogRef.componentInstance._answers = this._answers;
+    dialogRef.componentInstance.answers = this._answers;
     dialogRef.componentInstance._idQuestion = idQuestion;
   }
-
 }

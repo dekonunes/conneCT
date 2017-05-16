@@ -77,6 +77,7 @@ export class UserAddComponent implements OnInit {
             formData.value.gender,
             formData.value.birthday,
             this.uidCT,
+            0,
             this.questionService.getQuestion(),
             null,
             this.gamificationService.getGamification())
