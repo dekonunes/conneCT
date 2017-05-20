@@ -8,7 +8,6 @@ import { UserComponent } from "./user.component";
 import { HeaderModule } from "../../header/header.module";
 import { QuestionListModule } from "../question-list/question-list.module";
 import { ContactRecordModule } from "../contact-record/contact-record.module";
-import { GraphicPeriodicityModule } from "../graphic-periodicity/graphic-periodicity.module";
 import { EditUserComponent } from './edit-user/edit-user.component'
 
 @NgModule({
@@ -16,7 +15,6 @@ import { EditUserComponent } from './edit-user/edit-user.component'
       BrowserAnimationsModule,
       BrowserModule,
       ContactRecordModule,
-      GraphicPeriodicityModule,
       MaterialModule,
       HeaderModule,
       QuestionListModule,

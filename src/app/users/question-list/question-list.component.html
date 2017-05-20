@@ -1,8 +1,22 @@
-<div class="paddingCard" *ngFor="let question of _questions;let i = index" (click)="collapseDescription(i)">
+<div class="col-12">
+  <b style="padding-left:25px;">Questões</b>
+  <b style="position: absolute;right:18.5%;">Atual</b>
+  <b style="position: absolute;right:4%;">Histórico</b>
+</div>
+<div class="paddingCard" *ngFor="let question of user?.questions;let i = index" (click)="collapseDescription(i)">
 <a>
     <md-card class="colorCard" >
      <h2>
       {{question.title}}
+      <img
+        mdTooltip="Atual"
+        mdTooltipPosition="after"
+        *ngIf="answers[i]"
+        src="assets/images/iconsQuestions/icon{{answers[i]?.answersNumber}}.svg"
+        class="answersIcon">
+        <a (click)="graphicDialog(i)" >
+          <md-icon class="historicButton">timeline</md-icon>
+        </a>
      </h2>
   </md-card>
 </a>

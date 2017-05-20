@@ -13,7 +13,8 @@ export class GamificationService {
     new Gamification (5, false, "Reserva", 0, 'Responda por 15 dias todas as perguntas'),
     new Gamification (6, false, "Titular", 0, 'Responda por 30 dias todas as perguntas'),
     new Gamification (7, false, "Time", 0, 'Dias respondendo consectivamente'),
-    new Gamification (8, false, "Rodada", 0, 'Semanas respondendo consectivamente')
+    new Gamification (8, false, "Rodada", 0, 'Semanas respondendo consectivamente'),
+    new Gamification (9, true, "Troféu", 0, 'A cada dia você recebe uma nova parte do troféu')
     ];
 
   constructor() {}

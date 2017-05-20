@@ -1,3 +1,19 @@
 .spacePAD {
     margin-right: 5%;
 }
+
+.answersIcon{
+  height: auto;
+  width: 9%;
+  position:absolute;
+  top: 10%;
+  right: 15%;
+}
+
+.historicButton{
+  color: black;
+  right: 8%;
+  position: absolute;
+  font-size: 220%;
+  top:10%;
+}

@@ -9,7 +9,7 @@ import { QuestionService } from "../../../shared/question.service";
   styleUrls: ['./graphic-dialog.component.css']
 })
 export class GraphicDialogComponent implements OnInit  {
-  answers: Answer[][];
+  answers: Answer[];
   _idQuestion: number;
   arrayAnswers: Array<number> = new Array<number>(new Date(new Date().getFullYear(), new Date().getMonth()+1,0).getDate());
   public lineChartData:Array<any>;
@@ -19,10 +19,10 @@ export class GraphicDialogComponent implements OnInit  {
   ) {}
 
   ngOnInit() {
-      for (let ind in this.answers[this._idQuestion]) {
-        if (this.answers[this._idQuestion][ind] != undefined)
-          this.arrayAnswers[new Date(this.answers[this._idQuestion][ind].date).getDate()-1] = this.answers[this._idQuestion][ind].answersNumber;
-      }
+    for (let ind in this.answers[this._idQuestion]) {
+      if (this.answers[this._idQuestion][ind] != undefined)
+        this.arrayAnswers[new Date(this.answers[this._idQuestion][ind].date).getDate()-1] = this.answers[this._idQuestion][ind].answersNumber;
+    }
 
     this.lineChartData = [
       {data: this.arrayAnswers, label: this.questionService.getQuestion()[this._idQuestion].title}
@@ -70,7 +70,6 @@ export class GraphicDialogComponent implements OnInit  {
         range.push(start);
         start += step;
     }
-
     return range;
   }
 }

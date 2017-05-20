@@ -9,6 +9,7 @@ import 'hammerjs';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AuthService } from "./shared/auth.service";
 import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routes.module";
 import { ContactRecordModule } from "./users/contact-record/contact-record.module";
 import { DialogErrorComponent } from "./shared/dialog-error.component";
 import { UserService } from "./shared/user.service";
@@ -17,7 +18,6 @@ import { FooterModule } from "./footer/footer.module"
 import { HeaderModule } from "./header/header.module";
 import { HeaderLoginModule } from "./login/header-login.module";
 import { HomeModule } from "./home/home.module";
-import { AppRoutingModule } from "./app-routes.module";
 import { UserAddModule } from "./users/user-add/user-add.module";
 import { UserModule } from "./users/user/user.module";
 import { UserCTModule } from "./user-ct/user-ct.module";
