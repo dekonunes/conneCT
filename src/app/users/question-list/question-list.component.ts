@@ -42,7 +42,9 @@ export class QuestionListComponent implements OnInit{
     }
 
     graphicDialog (idQuestion: number) {
-      let dialogRef = this.dialog.open(GraphicDialogComponent, [this.user.answers,idQuestion])
+      let dialogRef = this.dialog.open(GraphicDialogComponent, {
+                height: '600px',
+                width: '1000px'});
       dialogRef.componentInstance.answers = this.user.answers;
       dialogRef.componentInstance._idQuestion = idQuestion;
     }
