@@ -1,4 +1,3 @@
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -30,11 +29,10 @@ export class SigninComponent implements OnInit {
 
     login(signinForm: any) {
       this.authService.signinWithEmail(this.signinForm.value)
-      .then(
-        (success) => {
-          this.router.navigate(['/users',success]);
-      }).catch((error: any) => {
+      .then(success => this.router.navigate(['/users',success]))
+      .catch((error: any) => {
         let errorText: string;
+        console.log(error)
         switch (error) {
           case "The email address is badly formatted.":
             errorText = 'O e-mail esta com o formato errado';

@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { MdSnackBar, MdDialog } from '@angular/material';
 
-import { FirebaseAuthState } from 'angularfire2';
 import { AuthService } from "../shared/auth.service";
 import { SnackBarComponent } from './snack-bar.component';
 import { DialogErrorComponent } from '../shared/dialog-error.component';
@@ -44,7 +43,7 @@ export class SignupComponent implements OnInit {
 
     onSignup(signupForm: FormGroup) {
       this.authService.createAuthUser(signupForm.value)
-        .then((authState: FirebaseAuthState) => {
+        .then(authState => {
           this.userService.addUserCT(new UserCT(
             authState.uid,
             signupForm.value.name,
@@ -71,7 +70,7 @@ export class SignupComponent implements OnInit {
             break;
             case "The email address is already in use by another account.":
               errorText = 'Esse e-mail já esta sendo usado.';
-            break;      
+            break;
             default:
               errorText = 'Envie um e-mail para dekonunesss@gmail.com com o seu login e o problema encontrado.';
             break;

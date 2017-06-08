@@ -9,6 +9,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import { User } from "../shared/user.model"
 import { UserService } from "../shared/user.service";
+import { AuthService } from "../shared/auth.service";
 
 @Component({
   selector: 'rb-header',
@@ -24,9 +25,11 @@ export class HeaderComponent implements OnInit {
   @Input() backButton: boolean;
   private termOfSearch: Subject<string> = new Subject<string>();
 
-  constructor(private router: Router,
-              private activatedRouter: ActivatedRoute,
-              private userService: UserService) {}
+  constructor(
+      private authService: AuthService,
+      private router: Router,
+      private activatedRouter: ActivatedRoute,
+      private userService: UserService) {}
 
   ngOnInit() {
     this.inicializeUids();
@@ -72,7 +75,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logOut();
+    this.authService.logOut();
     this.router.navigateByUrl('/home');
   }
 

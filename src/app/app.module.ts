@@ -5,8 +5,11 @@ import { HttpModule } from "@angular/http";
 import { MaterialModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import 'hammerjs';
+import * as firebase from 'firebase/app';
 
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
 import { AuthService } from "./shared/auth.service";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routes.module";
@@ -33,10 +36,10 @@ const myFirebaseConfig = {
   messagingSenderId: "882656858836"
 };
 
-const myFirebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
-};
+// const myFirebaseAuthConfig = {
+//   provider: AuthProviders.Password,
+//   method: AuthMethods.Password
+// };
 
 @NgModule({
     declarations: [
@@ -47,7 +50,9 @@ const myFirebaseAuthConfig = {
       DialogErrorComponent
     ],
     imports: [
-        AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig),
+        AngularFireModule.initializeApp(myFirebaseConfig, 'ConneCT'),
+        AngularFireAuthModule,
+        AngularFireDatabaseModule,
         BrowserModule,
         ContactRecordModule,
         FormsModule,

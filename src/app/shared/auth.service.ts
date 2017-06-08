@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth, AuthMethods, AuthProviders, FirebaseAuthState} from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
+  private currentUser: firebase.User;
   constructor(
-    public auth: AngularFireAuth
-  ) {}
+    public afAuth: AngularFireAuth
+  ) {
+    afAuth.authState.subscribe((user: firebase.User) => this.currentUser = user);
+  }
 
+  get authenticated(): boolean {
+    return this.currentUser !== null;
+  }
 
-  signinWithEmail(user: {email: string, password: string}): firebase.Promise<string> {
-    return this.auth.login(user)
-      .then((authState: FirebaseAuthState) => {
+  logOut() {
+    this.afAuth.auth.signOut();
+  }
+
+  signinWithEmail(user: {email: string, password: string}): firebase.Promise<any> {
+    return this.afAuth.auth.signInWithEmailAndPassword(user.email,user.password)
+      .then(authState => {
         return authState.uid;
       }).catch(this.handleError);
   }
 
-  createAuthUser(user: {email: string, password: string}): firebase.Promise<FirebaseAuthState> {
-    return this.auth.createUser(user)
-      .then((authState: FirebaseAuthState) => {
+  createAuthUser(user: {email: string, password: string}): firebase.Promise<any> {
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email,user.password)
+      .then(authState => {
         return authState;
       }).catch(this.handleError);
   }
