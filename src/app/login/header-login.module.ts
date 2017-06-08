@@ -10,6 +10,7 @@ import { SigninComponent } from "./signin.component";
 import { HeaderLoginComponent } from "./header-login.component";
 import { SnackBarComponent } from "./snack-bar.component";
 import { DialogErrorComponent } from '../shared/dialog-error.component';
+import { CreditsComponent } from '../footer/credits/credits.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { DialogErrorComponent } from '../shared/dialog-error.component';
       MaterialModule
     ],
     entryComponents: [
-      SnackBarComponent      
+      SnackBarComponent,
+      CreditsComponent
     ],
     declarations: [
       HeaderLoginComponent,

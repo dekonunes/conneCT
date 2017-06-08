@@ -8,6 +8,7 @@ import { SnackBarComponent } from './snack-bar.component';
 import { DialogErrorComponent } from '../shared/dialog-error.component';
 import { UserCT } from '../shared/userCT.model';
 import { UserService } from "../shared/user.service";
+import { DisclosureComponent } from '../footer/disclosure/disclosure.component';
 
 @Component({
     selector: 'rb-signup',
@@ -24,6 +25,10 @@ export class SignupComponent implements OnInit {
       private router: Router,
       private userService: UserService,
       private formBuilder: FormBuilder) {}
+
+    openDialogDisclosure() {
+        this.dialog.open(DisclosureComponent);
+    }
 
     buildForm() {
       this.signupForm = this.formBuilder.group({

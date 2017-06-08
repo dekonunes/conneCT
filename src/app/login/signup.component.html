@@ -82,8 +82,9 @@
           <span class="sr-only">Error:</span>
            {{formErrors.confirmPassword}}
         </div>
+        Eu li e aceito os <a (click)="openDialogDisclosure()">termos de uso</a>
         <md-checkbox formControlName="checkBoxDisclosure" required [(ngModel)]="checkedCheckBox">
-          Eu li e aceito os <a>termos de uso</a>.
+
         </md-checkbox>
         <div class="alert alert-danger" role="alert" *ngIf="formErrors.checkedCheckBox">
           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
