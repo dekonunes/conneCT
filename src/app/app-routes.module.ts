@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
+
+import { WhoUsingComponent } from "./login/who-using/who-using.component";
 import { SignupComponent } from "./login/signup.component";
 import { SigninComponent } from "./login/signin.component";
 import { HomeComponent } from "./home/home.component";
@@ -14,6 +16,7 @@ const APP_ROUTES: Routes = [
 
 export const CHILD_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
+    { path: 'whoUsing', component: WhoUsingComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'users/:idCT', component: UsersListComponent },

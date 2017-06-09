@@ -24,6 +24,7 @@ export class UsersListComponent implements OnInit{
   users$: Observable<User[]>;
   users: User[] = [];
   filteredUsers: User[] = [];
+  nameCT: string;
   isSpinner: boolean = true;
   private termOfSearch: Subject<string> = new Subject<string>();
 
@@ -37,7 +38,10 @@ export class UsersListComponent implements OnInit{
     this.activatedRouter.params
       .forEach((_params: Params) => this.uidCT = _params['idCT']);
     this.userService.getUserCT(this.uidCT)
-      .subscribe(_CT => ga('set', 'userId', `${_CT["username"]}_${this.uidCT}`));
+      .subscribe(_CT => {
+        ga('set', 'userId', `${_CT["username"]}_${this.uidCT}`)
+        this.nameCT = _CT["username"];
+      });
     this.updatePageOfUsers();
   }
 

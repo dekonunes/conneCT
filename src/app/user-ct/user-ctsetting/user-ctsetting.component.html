@@ -8,12 +8,12 @@
   </md-progress-spinner>
 </div>
 <div class="col-md-10 col-md-offset-1" *ngIf="!isSpinner">
-  <h3>Edite os dados da CT</h3>
+  <h3>Edite os dados do Grupo de Apoio</h3>
   <form [formGroup]='editForm' (ngSubmit)="onEdit(editForm); $event.preventDefault()" novalidade>
 
         <label for="username"><md-icon>store_mall_directory</md-icon> Nome da instituição</label>
         <md-input-container class="full-width">
-          <input mdInput placeholder="Digite o nome da CT"
+          <input mdInput placeholder="Digite o nome do Grupo de Apoio"
             required
             name="username"
             formControlName="username">

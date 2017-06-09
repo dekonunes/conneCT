@@ -10,9 +10,9 @@ a {
 }
 
 .answersMedianIcon {
-  height: auto;
+  height: 80%;
   width: 5%;
   position:absolute;
-  top: 18%;
+  top: 12%;
   right: 5%;
 }

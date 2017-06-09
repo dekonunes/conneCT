@@ -36,11 +36,6 @@ const myFirebaseConfig = {
   messagingSenderId: "882656858836"
 };
 
-// const myFirebaseAuthConfig = {
-//   provider: AuthProviders.Password,
-//   method: AuthMethods.Password
-// };
-
 @NgModule({
     declarations: [
         AppComponent,

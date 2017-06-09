@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from "./home.component"
-import { HeaderLoginModule } from "../login/header-login.module"
+import { HeaderLoginModule } from "../login/header-login.module";
+
 
 @NgModule({
     imports: [
