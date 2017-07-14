@@ -58,7 +58,10 @@ export class UserService {
   }
 
   removeUserDQ(uidCT:string, uidDQ:string) {
-      this.af.object(`/${uidCT}/users/${uidDQ}`).remove();
+      this.af.object(`/${uidCT}/users/${uidDQ}`).update({
+        deleted: true
+      });
+      // this.af.object(`/${uidCT}/users/${uidDQ}`).remove();
   }
 
   getSpecificUser(uidCT:string, key:string): Observable<User> {

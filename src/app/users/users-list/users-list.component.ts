@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import { MdDialog } from '@angular/material';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 import { Subject } from "rxjs/Subject";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';

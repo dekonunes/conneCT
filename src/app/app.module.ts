@@ -45,7 +45,7 @@ const myFirebaseConfig = {
       DialogErrorComponent
     ],
     imports: [
-        AngularFireModule.initializeApp(myFirebaseConfig, 'ConneCT'),
+        AngularFireModule.initializeApp(myFirebaseConfig),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         BrowserModule,

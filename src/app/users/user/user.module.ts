@@ -8,7 +8,8 @@ import { UserComponent } from "./user.component";
 import { HeaderModule } from "../../header/header.module";
 import { QuestionListModule } from "../question-list/question-list.module";
 import { ContactRecordModule } from "../contact-record/contact-record.module";
-import { EditUserComponent } from './edit-user/edit-user.component'
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { DialogConfirmDeleteComponent } from './edit-user/dialog-confirm-delete/dialog-confirm-delete.component'
 
 @NgModule({
     imports: [
@@ -23,10 +24,12 @@ import { EditUserComponent } from './edit-user/edit-user.component'
     ],
     declarations: [
       UserComponent,
-      EditUserComponent
+      EditUserComponent,
+      DialogConfirmDeleteComponent
     ],
     entryComponents: [
-      EditUserComponent
+      EditUserComponent,
+      DialogConfirmDeleteComponent
     ],
     exports: [
       UserComponent

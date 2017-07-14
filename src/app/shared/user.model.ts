@@ -14,6 +14,7 @@ export class User {
     public birthday: string,
     public uidCT: string,
     public averageAnswers: number,
+    public deleted: boolean,
     public questions?: Question[],
     public answers?: Answer[],
     public gamification?: Gamification[]

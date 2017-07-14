@@ -15,7 +15,9 @@ export class HeaderLoginComponent {
   ) { }
 
   openDialogCredits() {
-    this.dialog.open(CreditsComponent);
+    this.dialog.open(CreditsComponent, {
+              height: '600px',
+              width: '1000px'});
   }
 
 

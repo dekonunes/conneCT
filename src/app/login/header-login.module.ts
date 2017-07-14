@@ -11,7 +11,8 @@ import { HeaderLoginComponent } from "./header-login.component";
 import { SnackBarComponent } from "./snack-bar.component";
 import { DialogErrorComponent } from '../shared/dialog-error.component';
 import { CreditsComponent } from '../footer/credits/credits.component';
-import { WhoUsingComponent } from './who-using/who-using.component'
+import { WhoUsingComponent } from './who-using/who-using.component';
+import { HelpComponent } from './help/help.component'
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { WhoUsingComponent } from './who-using/who-using.component'
       SignupComponent,
       SigninComponent,
       SnackBarComponent,
-      WhoUsingComponent
+      WhoUsingComponent,
+      HelpComponent
     ],
     exports: [
       HeaderLoginComponent,

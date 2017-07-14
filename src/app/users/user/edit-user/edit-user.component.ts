@@ -7,6 +7,7 @@ import { MdDialogRef, MdIconRegistry, MdDialog } from "@angular/material";
 import { User } from "../../../shared/user.model"
 import { UserService } from "../../../shared/user.service";
 import { DialogErrorComponent } from "../../../shared/dialog-error.component";
+import { DialogConfirmDeleteComponent } from "./dialog-confirm-delete/dialog-confirm-delete.component"
 
 
 @Component({
@@ -62,9 +63,13 @@ export class EditUserComponent implements OnInit {
   }
 
   onDelete() {
-    this.userService.removeUserDQ(this._uidCT, this._uidDQ);
-    this.dialogRef.close();
-    this.router.navigate([`/users/${this._uidCT}`]);
+    let dialogRef = this.dialog.open(DialogConfirmDeleteComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.removeUserDQ(this._uidCT, this._uidDQ);
+        this.router.navigate([`/users/${this._uidCT}`]);
+      }
+    });
   }
 
   onValueChanged(data?: any) {
