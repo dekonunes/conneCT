@@ -28,7 +28,7 @@ import { UsersListModule } from './users/users-list/users-list.module';
 import { QuestionListModule } from "./users/question-list/question-list.module";
 import { QuestionService } from "./shared/question.service";
 
-const myFirebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAL-OyrHkTqw4j4sgcapSnFKi0wFc61dNo",
   authDomain: "connect-48f5c.firebaseapp.com",
   databaseURL: "https://connect-48f5c.firebaseio.com",
@@ -45,7 +45,7 @@ const myFirebaseConfig = {
       DialogErrorComponent
     ],
     imports: [
-        AngularFireModule.initializeApp(myFirebaseConfig),
+        AngularFireModule.initializeApp(firebaseConfig),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         BrowserModule,

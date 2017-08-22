@@ -5,9 +5,7 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthService {
   private currentUser: firebase.User;
-  constructor(
-    public afAuth: AngularFireAuth
-  ) {
+  constructor(private afAuth: AngularFireAuth) {
     afAuth.authState.subscribe((user: firebase.User) => this.currentUser = user);
   }
 
