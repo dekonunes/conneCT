@@ -20,6 +20,8 @@ export class UserAddComponent implements OnInit {
     uidCT:string;
     newUserForm: FormGroup;
 
+    requiredFormControl = new FormControl('', Validators.required);
+
     genders = [
         'Feminino',
         'Masculino'
@@ -41,14 +43,14 @@ export class UserAddComponent implements OnInit {
 
     buildForm() {
       this.newUserForm = this.formBuilder.group({
-        name: ['', [Validators.required, Validators.minLength(4)]],
-        email: ['', Validators.compose([Validators.required, Validators.email])],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6),this.isEqualPassword.bind(this)]],
-        telephone: ['', [Validators.required, Validators.minLength(10)]],
-        telephoneOther: ['', [Validators.required, Validators.minLength(10)]],
-        gender: ['', Validators.required],
-        birthday: ['', Validators.required]
+        name: ['', Validators.minLength(4)],
+        email: ['',  Validators.email],
+        password: ['',  Validators.minLength(6)],
+        confirmPassword: ['', [Validators.minLength(6),this.isEqualPassword.bind(this)]],
+        telephone: ['', Validators.minLength(10)],
+        telephoneOther: ['', Validators.minLength(10)],
+        gender: [''],
+        birthday: ['']
       });
       this.newUserForm.valueChanges
         .subscribe(data => this.onValueChanged(data));
