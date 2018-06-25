@@ -19,20 +19,30 @@ export class GraphicDialogComponent implements OnInit  {
   ) {}
 
   ngOnInit() {
+    //console.log(this.datesAnswers(new Date().getDate()))
+    let date = new Date();
+    //console.log(new Date(date.getFullYear(),date.getMonth(),2))
+    
     for (let ind in this.answers[this._idQuestion]) {
-      if (this.answers[this._idQuestion][ind] != undefined)
-        this.arrayAnswers[new Date(this.answers[this._idQuestion][ind].date).getDate()-1] = this.answers[this._idQuestion][ind].answersNumber;
+      if (this.answers[this._idQuestion][ind]) {
+        let dateAnswer = new Date(this.answers[this._idQuestion][ind].date);
+        this.datesAnswers().forEach((element, index) => {
+          if(dateAnswer.getDate() == element.getDate() && dateAnswer.getMonth() == element.getMonth() && dateAnswer.getFullYear() == element.getFullYear())
+            this.arrayAnswers[index] = this.answers[this._idQuestion][ind].answersNumber;  
+        });        
+      }
     }
 
     this.lineChartData = [
-      {data: this.arrayAnswers, label: this.questionService.getQuestion()[this._idQuestion].title}
+      {
+        data: this.arrayAnswers,
+        label: this.questionService.getQuestion()[this._idQuestion].title
+      }
     ];
   }
 
-  public lineChartLabels:Array<any> = this.range(
-    1,
-    new Date(new Date().getFullYear(), new Date().getMonth()+1,0).getDate(),
-    1);
+  public lineChartLabels:Array<any> = 
+    this.range(new Date().getDate());
 
   public lineChartColors:Array<any> = [
     { // grey
@@ -58,18 +68,37 @@ export class GraphicDialogComponent implements OnInit  {
       }
     }
 
-
-  range (start:number, end:number, step:number) {
-    let range = [];
-
-    if (end < start) {
-        step = -step;
+    datesAnswers() {
+      let date = new Date();
+      let datas = [];
+      let daysLastMonth = new Date(date.getFullYear(),date.getMonth()-2,0).getDate();
+      let step = date.getDate() - daysLastMonth;
+      while (step <= date.getDate()) {
+        if(step <= 0) {
+          datas.push(new Date(date.getFullYear(),date.getMonth()-1,daysLastMonth+step))
+          step++;
+        } else {
+          datas.push(new Date(date.getFullYear(),date.getMonth(),step))
+          step++;
+        }
+      }
+      return datas;
     }
 
-    while (step > 0 ? end >= start : end <= start) {
-        range.push(start);
-        start += step;
+    range(start:number) {
+      let range = [];
+      let date = new Date();
+      let daysLastMonth = new Date(date.getFullYear(),date.getMonth()-2,0).getDate();
+      let step = start - daysLastMonth;
+      while (step <= start) {
+        if(step <= 0) {
+          range.push(daysLastMonth+step);
+          step++;
+        } else {
+          range.push(step);
+          step++;
+        }
+      }
+      return range;
     }
-    return range;
-  }
 }
